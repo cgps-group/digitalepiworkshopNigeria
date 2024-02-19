@@ -1,5 +1,0 @@
-# wcs_resources
-
----
-
----
