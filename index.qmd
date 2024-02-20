@@ -8,7 +8,7 @@ Link to [Digital Epidemiology](Syllabus.qmd)
 
 Link to [Bioinformatics](bioinformatics.qmd)
 
-Link to [Trim, Assmebly and QC](module3/module3.qmd)
+Link to [Trim, Assembly and QC](module3/module3.qmd)
 
 Link to [Pathogenwatch](module4/module4.qmd)
 
