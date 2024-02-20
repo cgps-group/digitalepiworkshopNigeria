@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "Digital Epidemiology Workshop GHRU Oxford - GHRU Ibadan, March 2024"
+  title: "Pathogen Genomics Week GHRU Oxford - March 2024"
   navbar:
     logo: /img/cgps.jpg
     left:
@@ -11,7 +11,9 @@ website:
       - href: agenda.qmd
         text: Agenda
       - href: Syllabus.qmd
-        text: Syllabus
+        text: Digital Epidemiology
+      - href: bioinformatics.qmd
+        text: Bioinformatics
       - text: Training materials
         menu:
           - module1/module1.qmd
@@ -20,9 +22,6 @@ website:
           - module4/module4.qmd
           - module5/module5.qmd
           - module6/module6.qmd
-          - module7/module7.qmd
-          - module8/module8.qmd
-          - hands-on/exercise.qmd
           - resources.qmd
 
 
@@ -32,17 +31,7 @@ website:
       - icon: twitter 
         href: https://twitter.com/TheCGPS
 
-  sidebar:
-    style: "docked"
-    search: true
-    collapse-level: 1
-    contents: 
-      - section: "Data-flo step-by-step tutorial"
-        contents:
-          - data-flo/data-flo.qmd
-      - section: "Microreact step-by-step tutorial"
-        contents:
-          - microreact/microreact.qmd
+
 format:
   html:
     theme:

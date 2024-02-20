@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Digital Epidemiology Workshop GHRU Oxford - GHRU Ibadan, March 2024 - Module3</title>
+<title>Pathogen Genomics Week GHRU Oxford - March 2024 - SESSION 3 - Introduction to Trimming, Assembly and QC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -76,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
     <img src="../img/cgps.jpg" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Digital Epidemiology Workshop GHRU Oxford - GHRU Ibadan, March 2024</span>
+    <span class="navbar-title">Pathogen Genomics Week GHRU Oxford - March 2024</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -95,7 +95,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../Syllabus.html" rel="" target="">
- <span class="menu-text">Syllabus</span></a>
+ <span class="menu-text">Digital Epidemiology</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../bioinformatics.html" rel="" target="">
+ <span class="menu-text">Bioinformatics</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-training-materials" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
@@ -112,31 +116,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../module3/module3.html" rel="" target="">
- <span class="dropdown-text">Module3</span></a>
+ <span class="dropdown-text">SESSION 3 - Introduction to Trimming, Assembly and QC</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../module4/module4.html" rel="" target="">
- <span class="dropdown-text">Module4</span></a>
+ <span class="dropdown-text">SESSION 4 - Genome Analysis with Pathogenwatch</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../module5/module5.html" rel="" target="">
- <span class="dropdown-text">Module5</span></a>
+ <span class="dropdown-text">SESSION 5 - Data integration with Data-flo</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../module6/module6.html" rel="" target="">
- <span class="dropdown-text">Module6</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../module7/module7.html" rel="" target="">
- <span class="dropdown-text">Module7</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../module8/module8.html" rel="" target="">
- <span class="dropdown-text">Module8</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../hands-on/exercise.html" rel="" target="">
- <span class="dropdown-text">Digital Epidemiology hands-on exercise</span></a>
+ <span class="dropdown-text">SESSION 6 - Data visualisation and Interpretation with Microreact</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../resources.html" rel="" target="">
@@ -151,69 +143,10 @@ ul.task-list li input[type="checkbox"] {
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Module3</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
- <span class="menu-text">Data-flo step-by-step tutorial</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-flo/data-flo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data-flo tutorial</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
- <span class="menu-text">Microreact step-by-step tutorial</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../microreact/microreact.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Microreact tutorial</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -221,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module3</h1>
+<h1 class="title">SESSION 3 - Introduction to Trimming, Assembly and QC</h1>
 </div>
 
 
@@ -236,9 +169,50 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>This is module 3</p>
+<section id="module-leads-julio-diaz-caballero-natacha-couto-georgina-lewis-woodhouse-emmanuelle-kumaran-nabil-fareed-alikhan-sophia-david-monica-abrudan" class="level3">
+<h3 class="anchored" data-anchor-id="module-leads-julio-diaz-caballero-natacha-couto-georgina-lewis-woodhouse-emmanuelle-kumaran-nabil-fareed-alikhan-sophia-david-monica-abrudan">Module Leads: Julio Diaz Caballero, Natacha Couto, Georgina Lewis-Woodhouse, Emmanuelle Kumaran, Nabil Fareed-Alikhan, Sophia David, Monica Abrudan</h3>
+<section id="based-on-the-exercise-developed-by-silvia-argimon" class="level4">
+<h4 class="anchored" data-anchor-id="based-on-the-exercise-developed-by-silvia-argimon"><strong><em>based on the exercise developed by Silvia Argimon</em></strong></h4>
+</section>
+</section>
+<section id="table-of-contents" class="level1">
+<h1>Table of contents</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#learning-outcomes">Objectives</a></li>
+<li><a href="#obtain-high-quality-assemblies">Trim, assemble and QC with GHRU Nextflow pipeline</a></li>
+</ul>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p><em>Note: This exercise is a work of fiction. Any resemblance to a real life situation is purely coincidental.</em></p>
+<p>From December 2023 to February 2024, three cases of primary bloodstream infections sustained by ertapenem-resistant <em>Klebsiella pneumoniae</em> were observed over a two-month period in the neonatal intensive care unit (NICU) at the University College Hospital in Ibadan, Oyo State. The NICU consists of a 15-bed tertiary level ward. Faecal screening of all admitted neonates was performed. Ten additional samples from the environment were collected. A plan of the NICU and sample collection can be seen below.</p>
+<p><img src="img/unit.png" width="70%" height="70%"></p>
+<p>The reference lab has sent you the culture results in an Excel file called (<a href="https://docs.google.com/spreadsheets/d/1ukjQPDBbp9wYKs3mm0U9FRxqOc67Q_Xe/edit?usp=drive_link&amp;ouid=108741433975672489406&amp;rtpof=true&amp;sd=true"><code>lab_results.xlsx</code></a>). Faecal screening of all admitted neonates, revealed that <strong>five other neonates</strong> were carriers of <em>K. pneumoniae</em>. The lab reported that <strong>2 out of 10</strong> environmental samples were positive for <em>K. pneumoniae</em>. <strong>This immediately prompted the closure of 1 room.</strong></p>
+<p>One colony from each confirmed case and two from the environment were sent to the GHRU-Ibadan unit for sequencing. The epidemiological and demographic data is summarised in the file <a href="https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link">epi_data.csv</a>.</p>
+<p>It is up to the user to now investigate the possibility of an outbreak of <em>K. pneumoniae</em> in the neonatal unit using the GHRU assembly pipeline, Pathogenwatch, data-flo and Microreact, free web applications developed by the Centre for Genomic Pathogen Surveillance for data analyses, integration and visualisation.</p>
+</section>
+<section id="learning-outcomes" class="level1">
+<h1>Objectives</h1>
+<p>At the end of this session the participants will be able to:</p>
+<ol type="1">
+<li>Trim, assemble and QC with GHRU Nextflow pipeline</li>
+<li>Obtain high quality assemblies for downstream analysis</li>
+<li>Identify and discard low quality genomes</li>
+<li>Determine the probable cause of issues during sequencing and assembly</li>
+</ol>
+</section>
+<section id="obtain-high-quality-assemblies" class="level1">
+<h1>Trim, assemble and QC with GHRU Nextflow pipeline</h1>
+<p><code>https://gitlab.com/cgps/ghru/pipelines/assembly</code></p>
+<p>At this point, the user is given 22 fastq files. The GHRU assembly pipeline uses a workflow implemented in Nextflow to process Illumina short-read fastq files and convert them to assemblies using the <a href="https://github.com/ablab/spades">SPAdes assembler</a>. Additionally, the workflow includes a quality control before and after trimming with <a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a>. The final assemblies are also quality controled using <a href="https://quast.sourceforge.net/quast">QUAST</a>.</p>
+<p>First download Nextflow: <code>curl -s https://get.nextflow.io | bash</code></p>
+<p>To download the GHRU Assembly pipeline download the code: <code>curl https://gitlab.com/cgps/ghru/pipelines/assembly.git</code></p>
+<p>To run the pipeline: <code>./nextflow run assembly.nf \ --adapter_file adapters.fas \ --qc_conditions qc_conditions_nextera_relaxed_dev.yml \ --input_dir input_data \ --fastq_pattern '*{R,_}{1,2}.f*q.gz' \ --output_dir assemblies \ --depth_cutoff 100 \ --prescreen_file_size_check 12 \ --confindr_db_path /path_to/confindr_database \ --careful \ --kmer_min_copy 3 \ --skip_quast_summary \ --skip_quast_multiqc \ --skip_fastqc_multiqc \ -w work \ -qs 1000 -resume</code></p>
+<p><strong><em>The materials provided in this repository are FREE to use.</em></strong> <strong><em>This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.</em></strong></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

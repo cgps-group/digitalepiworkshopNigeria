@@ -1,5 +1,50 @@
 ---
-title: "Module3"
+title: "SESSION 3 - Introduction to Trimming, Assembly and QC"
 ---
 
-This is module 3
+### Module Leads: Julio Diaz Caballero, Natacha Couto, Georgina Lewis-Woodhouse, Emmanuelle Kumaran, Nabil Fareed-Alikhan, Sophia David, Monica Abrudan
+
+#### ***based on the exercise developed by Silvia Argimon***
+
+# Table of contents
+
+-   [Introduction](#introduction)
+-   [Objectives](#learning-outcomes)
+-   [Trim, assemble and QC with GHRU Nextflow pipeline](#obtain-high-quality-assemblies)
+
+# Introduction {#introduction}
+
+*Note: This exercise is a work of fiction. Any resemblance to a real life situation is purely coincidental.*
+
+From December 2023 to February 2024, three cases of primary bloodstream infections sustained by ertapenem-resistant *Klebsiella pneumoniae* were observed over a two-month period in the neonatal intensive care unit (NICU) at the University College Hospital in Ibadan, Oyo State. The NICU consists of a 15-bed tertiary level ward. Faecal screening of all admitted neonates was performed. Ten additional samples from the environment were collected. A plan of the NICU and sample collection can be seen below.
+
+<img src="img/unit.png" width="70%" height="70%"/>
+
+The reference lab has sent you the culture results in an Excel file called ([`lab_results.xlsx`](https://docs.google.com/spreadsheets/d/1ukjQPDBbp9wYKs3mm0U9FRxqOc67Q_Xe/edit?usp=drive_link&ouid=108741433975672489406&rtpof=true&sd=true)). Faecal screening of all admitted neonates, revealed that **five other neonates** were carriers of *K. pneumoniae*. The lab reported that **2 out of 10** environmental samples were positive for *K. pneumoniae*. **This immediately prompted the closure of 1 room.**
+
+One colony from each confirmed case and two from the environment were sent to the GHRU-Ibadan unit for sequencing. The epidemiological and demographic data is summarised in the file [epi_data.csv](https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link).
+
+It is up to the user to now investigate the possibility of an outbreak of *K. pneumoniae* in the neonatal unit using the GHRU assembly pipeline, Pathogenwatch, data-flo and Microreact, free web applications developed by the Centre for Genomic Pathogen Surveillance for data analyses, integration and visualisation.
+
+# Objectives {#learning-outcomes}
+
+At the end of this session the participants will be able to:
+
+1.  Trim, assemble and QC with GHRU Nextflow pipeline
+2.  Obtain high quality assemblies for downstream analysis
+3.  Identify and discard low quality genomes
+4.  Determine the probable cause of issues during sequencing and assembly
+
+# Trim, assemble and QC with GHRU Nextflow pipeline {#obtain-high-quality-assemblies}
+
+`https://gitlab.com/cgps/ghru/pipelines/assembly`
+
+At this point, the user is given 22 fastq files. The GHRU assembly pipeline uses a workflow implemented in Nextflow to process Illumina short-read fastq files and convert them to assemblies using the [SPAdes assembler](https://github.com/ablab/spades). Additionally, the workflow includes a quality control before and after trimming with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic). The final assemblies are also quality controled using [QUAST](https://quast.sourceforge.net/quast).
+
+First download Nextflow: `curl -s https://get.nextflow.io | bash`
+
+To download the GHRU Assembly pipeline download the code: `curl https://gitlab.com/cgps/ghru/pipelines/assembly.git`
+
+To run the pipeline: `./nextflow run assembly.nf \ --adapter_file adapters.fas \ --qc_conditions qc_conditions_nextera_relaxed_dev.yml \ --input_dir input_data \ --fastq_pattern '*{R,_}{1,2}.f*q.gz' \ --output_dir assemblies \ --depth_cutoff 100 \ --prescreen_file_size_check 12 \ --confindr_db_path /path_to/confindr_database \ --careful \ --kmer_min_copy 3 \ --skip_quast_summary \ --skip_quast_multiqc \ --skip_fastqc_multiqc \ -w work \ -qs 1000 -resume`
+
+***The materials provided in this repository are FREE to use.*** ***This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.***

@@ -1,5 +1,98 @@
 ---
-title: "Module5"
+title: "SESSION 5 - Data integration with Data-flo"
 ---
 
-5555
+### Module Leads: Julio Diaz Caballero, Natacha Couto, Georgina Lewis-Woodhouse, Emmanuelle Kumaran, Nabil Fareed-Alikhan, Sophia David, Monica Abrudan
+
+#### ***based on the exercise developed by Silvia Argimon***
+
+# Table of contents
+
+-   [Introduction](#intro)
+-   [Objectives](#learning-outcomes)
+-   [Data integration with Data-flo](#data-flow)
+-   [Sign-in to data-flo](#sign-in-to-data-flo)
+
+# Introduction {#intro}
+
+Data-flo ([https://data-flo.io/](/introduction/readme#what-is-data-flo)) is a system for customised integration and manipulation of diverse data via a simple drag and drop interface.\*\*
+
+For Data-flo documentation, go to <https://docs.data-flo.io/introduction/readme>.
+
+Data-flo can easily combine epidemiological data, genomic data, laboratory data, and various metadata from disparate sources (i.e., different data systems) and formats.
+
+Data-flo provides a visual method to design a reusable pipeline to integrate, clean, and manipulate data in a multitude of ways, eliminating the need for continuous manual intervention (e.g., coding, formatting, spreadsheet formulas, manual copy-pasting).
+
+Data-flo pipelines are combinations of ready-to-use data adaptors that can be tailored, modularised and shared for reuse and reproducibility. Once a Data-flo pipeline has been created, it can be run anytime, by anyone with access, to enable push-button data extraction and transformation. This saves significant time by removing the bulk of the manual repetitive workflows that require multiple sequential or tedious steps, enabling practitioners to focus on analysis and interpretation.
+
+# Objectives {#learning-outcomes}
+
+At the end of this session the participants will be able to:
+
+1.  Build a data transformation dataflow by combining ready-to-use data adaptors suited to the exercise
+2.  Acquire a microreact link that combines all the data files from the exercise using data-flo
+
+# Data integration with Data-flo {#data-flow}
+
+`https://data-flo.io/`
+
+*Note: you need to sign-up for data-flo and Microreact. See instructions in the [Resources](#resources) section. Creating your own account will allow you to manage and edit your projects.*
+
+A cgSNP tree was generated through Pathogenwatch ([`tree.nwk`](https://drive.google.com/file/d/1R8nyAXNaiGIBL-2u30sD-W5Ajy-VNUeR/view?usp=drive_link)). Contextual genomes present in Pathogenwatch (Jan 2020-now) were also included in the tree inference and their associated data added to the [`epi_data.csv`](https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link) file.
+
+The user now has the information needed for the investigation in the following formats:
+
+-   [`epi_data.csv`](https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link) Epi data from 3 clinical cases, 7 carriers and 10 environmental samples
+-   [`lab_results.xlsx`](https://docs.google.com/spreadsheets/d/1ukjQPDBbp9wYKs3mm0U9FRxqOc67Q_Xe/edit?usp=drive_link&ouid=108741433975672489406&rtpof=true&sd=true) Culture and AST results
+-   [`mlst-Pasteur.csv`](https://drive.google.com/file/d/1dpagR9zHyk1WtJhvfsWqskwZhNc8Enax/view?usp=drive_link) MLST results from Pathogenwatch
+-   [`tree.nwk`](https://drive.google.com/file/d/1R8nyAXNaiGIBL-2u30sD-W5Ajy-VNUeR/view?usp=drive_link) cgSNP tree of 7 Kpn genomes
+
+The files are located in [**this link**](https://drive.google.com/drive/folders/1raGT9V6QrobVJMdBWgwVAQ8zpuIHfjGa?usp=drive_link).
+
+We will combine data from these different sources with a data-flo workflow that takes the files above as input, and creates as an output a Microreact project where the data can be visualised.
+
+Open the data-flo workflow ([**https://data-flo.io/run?wbhznSXSn3qAomUnGrXesx**](https://data-flo.io/run?wbhznSXSn3qAomUnGrXesx))
+
+<img src="img/dataflo_2023.png" width="50%" height="50%"/>
+
+Copy the workflow to your own dataflo account.
+
+<img src="img/dataflo_copy.png" width="50%" height="50%"/>
+
+This will open a copy of this workflow in your dataflo account.
+
+<img src="img/dataflo_workflow.png" width="50%" height="50%"/>
+
+**On a different browser tab**, get your microreact `API access token` at [**https://microreact.org/my-account/settings**](https://microreact.org/my-account/settings) (you must already have created your microreact account).
+
+<img src="img/miroreact_token.png" width="50%" height="50%"/>
+
+Edit the workflow to include your own microreact `API access token`.
+
+1.  Click on `*access token` in the `Create microreact project` box
+2.  From the options on the right, select `Bind to value`
+3.  Paste your `API access token` in the `VALUE` box
+
+<img src="img/dataflo_key.png" width="50%" height="50%"/>
+
+Save your newly edited dataflo project by clicking on the `save` icon.
+
+<img src="img/dataflo_save.png" width="50%" height="50%"/>
+
+Now lets go to the implementation page by clicking on the `i` icon.
+
+<img src="img/dataflo_implementation.png" width="50%" height="50%"/>
+
+To run the workflow upload the files named lab_results.xlsx, tree.nwk, epi_data.csv, and mlst-Pasteur.csv.
+
+<img src="img/dataflo_run2.png" width="50%" height="50%"/>
+
+Click on **`Run`**. The Outputs box now shows the url of a Microreact project created by data-flo.
+
+<img src="img/dataflo_result.png" width="50%" height="50%"/>
+
+# Sign-in to data-flo {#sign-in-to-data-flo}
+
+[**https://docs.data-flo.io/introduction/getting-started-sign-in**](https://docs.data-flo.io/introduction/getting-started-sign-in)
+
+***The materials provided in this repository are FREE to use.*** ***This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.***

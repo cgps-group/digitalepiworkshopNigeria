@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Digital Epidemiology Workshop GHRU Oxford - GHRU Ibadan, March 2024 - Module6</title>
+<title>Pathogen Genomics Week GHRU Oxford - March 2024 - SESSION 6 - Data visualisation and Interpretation with Microreact</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -76,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
     <img src="../img/cgps.jpg" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Digital Epidemiology Workshop GHRU Oxford - GHRU Ibadan, March 2024</span>
+    <span class="navbar-title">Pathogen Genomics Week GHRU Oxford - March 2024</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -95,7 +95,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../Syllabus.html" rel="" target="">
- <span class="menu-text">Syllabus</span></a>
+ <span class="menu-text">Digital Epidemiology</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../bioinformatics.html" rel="" target="">
+ <span class="menu-text">Bioinformatics</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-training-materials" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
@@ -112,31 +116,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../module3/module3.html" rel="" target="">
- <span class="dropdown-text">Module3</span></a>
+ <span class="dropdown-text">SESSION 3 - Introduction to Trimming, Assembly and QC</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../module4/module4.html" rel="" target="">
- <span class="dropdown-text">Module4</span></a>
+ <span class="dropdown-text">SESSION 4 - Genome Analysis with Pathogenwatch</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../module5/module5.html" rel="" target="">
- <span class="dropdown-text">Module5</span></a>
+ <span class="dropdown-text">SESSION 5 - Data integration with Data-flo</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../module6/module6.html" rel="" target="">
- <span class="dropdown-text">Module6</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../module7/module7.html" rel="" target="">
- <span class="dropdown-text">Module7</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../module8/module8.html" rel="" target="">
- <span class="dropdown-text">Module8</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../hands-on/exercise.html" rel="" target="">
- <span class="dropdown-text">Digital Epidemiology hands-on exercise</span></a>
+ <span class="dropdown-text">SESSION 6 - Data visualisation and Interpretation with Microreact</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../resources.html" rel="" target="">
@@ -151,69 +143,10 @@ ul.task-list li input[type="checkbox"] {
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Module6</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
- <span class="menu-text">Data-flo step-by-step tutorial</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-flo/data-flo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data-flo tutorial</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
- <span class="menu-text">Microreact step-by-step tutorial</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../microreact/microreact.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Microreact tutorial</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -221,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module6</h1>
+<h1 class="title">SESSION 6 - Data visualisation and Interpretation with Microreact</h1>
 </div>
 
 
@@ -236,9 +169,170 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>666</p>
+<section id="module-leads-julio-diaz-caballero-natacha-couto-georgina-lewis-woodhouse-emmanuelle-kumaran-nabil-fareed-alikhan-sophia-david-monica-abrudan" class="level3">
+<h3 class="anchored" data-anchor-id="module-leads-julio-diaz-caballero-natacha-couto-georgina-lewis-woodhouse-emmanuelle-kumaran-nabil-fareed-alikhan-sophia-david-monica-abrudan">Module Leads: Julio Diaz Caballero, Natacha Couto, Georgina Lewis-Woodhouse, Emmanuelle Kumaran, Nabil Fareed-Alikhan, Sophia David, Monica Abrudan</h3>
+<section id="based-on-the-exercise-developed-by-silvia-argimon" class="level4">
+<h4 class="anchored" data-anchor-id="based-on-the-exercise-developed-by-silvia-argimon"><strong><em>based on the exercise developed by Silvia Argimon</em></strong></h4>
+</section>
+</section>
+<section id="table-of-contents" class="level1">
+<h1>Table of contents</h1>
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#learning-outcomes">Objectives</a></li>
+<li><a href="#interpret-genomes">Data visualisation and Interpretation with Microreact</a></li>
+<li><a href="#sign-in-to-microreact">Sign-in to Microreact</a></li>
+<li><a href="#web-colours">Web colours</a></li>
+<li><a href="#bonus-activities">Bonus activities</a></li>
+</ul>
+</section>
+<section id="intro" class="level1">
+<h1>Introduction</h1>
+<p>Microreact (https://microreact.org/) is a web-based application for the provision of interactive data visualisations. It enables the rapid generation and linkage of trees, maps, networks, charts and timelines, enabling epidemiologists and key decision makers to react faster and with greater accuracy. Microreact can be deployed securely on a local server, behind firewalls and adhering to local data governance. Users can make their Microreact projects findable on the network, or share them privately with another user by sharing a downloaded project or using secret links. Microreact projects for public consumption can be shared on the public Microreact site.</p>
+</section>
+<section id="learning-outcomes" class="level1">
+<h1>Objectives</h1>
+<p>At the end of this session the participants will be able to:</p>
+<ol type="1">
+<li>Visualise a tree, metadata, a timeline and a map using Microreact</li>
+<li>Use slices in Microreact</li>
+<li>Create Views in Microreact</li>
+<li>Interpret the results</li>
+</ol>
+</section>
+<section id="interpret-genomes" class="level1">
+<h1>Data visualisation and Interpretation with Microreact</h1>
+<p><code>https://microreact.org/</code></p>
+<p>Open the Microreact link in the output from data-flo. It should look something like this:</p>
+<p><img src="img/microreact_link.png" width="50%" height="50%"></p>
+<p>Now change the colour column to “Source”. Click on the eye icon at the top right of the page. Select “Source” from the <code>Colour Column</code> dropdown list.</p>
+<p><img src="img/microreact_colour.png" width="50%" height="50%"></p>
+<p>Scale the markers on the map by clicking on the sliders icon, then in the opening options click on <code>Markers</code>. Finally, toggle the <code>Scale markers</code> option on.</p>
+<p><img src="img/microreact_markers.png" width="50%" height="50%"></p>
+<p>Change the colour column to “Source”. Click on the eye icon at the top left of the page. Then select “Source” from the <code>Colour Column</code> dropdown list.</p>
+<p><img src="img/microreact_source.png" width="50%" height="50%"></p>
+<p>Microreact assigns colours automatically to every column in your metadata table, but you can customise them. Let’s change the colour column to “Infection Type”. Click on the eye icon at the top left of the page. Then select “Infection Type” from the <code>Colour Column</code> dropdown list.</p>
+<p><img src="img/microreact_household.png" width="50%" height="50%"></p>
+<p>Now Select “Categorical” from the <code>Colour Palette</code> option. Next Select “qualitative” from the <code>Palette type</code> dropdown list and “10” from the <code>Number of colours</code> dropdown list. Finally, select the second option from the list of palettes.</p>
+<p><img src="img/microreact_palette.png" width="50%" height="50%"></p>
+<p>Change the colour column to “Hospital” and add the columns “Source” and “Ward” as metadata blocks. For this, select the slider icon from top right of the tree panel, then, click on the <code>Metadata blocks</code> button. Finally, select “Source” and “Household” from the list of options.</p>
+<p><img src="img/microreact_metadata_blocks.png" width="50%" height="50%"></p>
+</section>
+<section id="sign-in-to-microreact" class="level1">
+<h1>Sign-in to Microreact</h1>
+<p>Head over to <a href="https://microreact.org/my-account"><strong>https://microreact.org/my-account</strong></a>, and sign up using your email address or any other authenticating option</p>
+<p>!<img src="img/microreact_signup.png" width="30%" height="30%"></p>
+</section>
+<section id="web-colours" class="level1">
+<h1>Web colours</h1>
+<p>Web colours are used on web pages, such as the microreact.org projects, and are usually specified in hexadecimal format preceded by ​​a number sign (or hashtag sign if you were born before the Jurassic period). For example, <code>#FFFFFF</code> is the hexadecimal code (or hex code) for the colour “white”, <code>#000000</code> is the hex code for the colour “black”, and <code>#FF00FF</code> is the hex code for the colour “magenta”. For more information on the format of the hexadecimal code see Wikipedia page <a href="https://en.wikipedia.org/wiki/Web_colors"><strong>https://en.wikipedia.org/wiki/Web_colors</strong></a></p>
+<p>Useful websites to work with web colours:</p>
+<section id="colorbrewer" class="level3">
+<h3 class="anchored" data-anchor-id="colorbrewer">ColorBrewer</h3>
+<p><a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3"><strong>https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3</strong></a> Colour palettes for maps</p>
+</section>
+<section id="colorhexa" class="level3">
+<h3 class="anchored" data-anchor-id="colorhexa">ColorHexa</h3>
+<p><a href="https://www.colorhexa.com/"><strong>https://www.colorhexa.com/</strong></a> Get complementary colours, colour gradients, etc.</p>
+</section>
+<section id="coolors" class="level3">
+<h3 class="anchored" data-anchor-id="coolors">Coolors</h3>
+<p><a href="https://coolors.co/palettes/trending"><strong>https://coolors.co/palettes/trending</strong></a> Colour palette generator</p>
+</section>
+<section id="wes-anderson-colour-palettes" class="level3">
+<h3 class="anchored" data-anchor-id="wes-anderson-colour-palettes">Wes Anderson colour palettes</h3>
+<p><a href="https://github.com/karthik/wesanderson"><strong>https://github.com/karthik/wesanderson</strong></a> Hipster colour palettes inspired by Wes Anderson movies</p>
+</section>
+</section>
+<section id="bonus-activities" class="level1">
+<h1>Bonus activities</h1>
+<section id="create-a-microreact-project-using-a-metadata-in-csv-format-and-a-phylogenetic-tree." class="level3">
+<h3 class="anchored" data-anchor-id="create-a-microreact-project-using-a-metadata-in-csv-format-and-a-phylogenetic-tree.">1. Create a microreact project using a metadata in csv format and a phylogenetic tree.</h3>
+<ol type="a">
+<li>Click on the menu icon at the top left of the screen</li>
+</ol>
+<p><img src="img/microreact_menu_icon.png" width="40%" height="40%"></p>
+<ol start="2" type="a">
+<li>Click on <code>Upload</code></li>
+</ol>
+<p><img src="img/microreact_upload_option.png" width="30%" height="30%"></p>
+<ol start="3" type="a">
+<li>Click on the <code>+</code> symbol at the bottom right of the screen.</li>
+</ol>
+<p><img src="img/microreact_plus_icon.png" width="10%" height="10%"></p>
+<ol start="4" type="a">
+<li>Select <code>Browse Files</code></li>
+</ol>
+<p><img src="img/microreact_browse_files.png" width="20%" height="20%"></p>
+<ol start="5" type="a">
+<li><p>Choose the files <a href="https://drive.google.com/file/d/1R8nyAXNaiGIBL-2u30sD-W5Ajy-VNUeR/view?usp=drive_link"><code>tree.nwk</code></a> and <a href="https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link"><code>epi_data.csv</code></a>, and click on the <code>Open</code> button (These files were downloaded in the <a href="#merge-data-with-data-flo">dataflo</a> section).</p></li>
+<li><p>Click on <code>Continue</code> in the next prompts.</p></li>
+<li><p>Your view will look like this:</p></li>
+</ol>
+<p><img src="img/microreact_bonus_view.png" width="30%" height="30%"></p>
+<ol start="8" type="a">
+<li>You can add a Timeline by clicking on the <code>pencil</code> icon at the top left of the screen, and clicking on <code>Create New Timeline</code></li>
+</ol>
+<p><img src="img/microreact_pencil_icon.png" width="50%" height="50%"></p>
+<ol type="i">
+<li>Then position the new panel by dragging the pointer to the bottom panel.</li>
+</ol>
+<p><img src="img/microreact_bottom_panel.png" width="50%" height="50%"></p>
+<ol start="10" type="a">
+<li>Finally, select “One column: Formatted Values” from the <code>Temporal Data Type</code> dropdown list, and “Collection Date” from the <code>Temporal Data Column</code> dropdown list. Click on <code>CLOSE</code></li>
+</ol>
+<p><img src="img/microreact_temp_data_type.png" width="50%" height="50%"></p>
+</section>
+<section id="create-a-microreact-project-from-a-google-spreadsheet" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-microreact-project-from-a-google-spreadsheet">2. Create a Microreact project from a Google Spreadsheet</h2>
+<ol type="a">
+<li>Open this <a href="https://docs.google.com/spreadsheets/d/1DN6fyhHmmkgEU0Ml7Ep_y_2l_JpQZkBfmXZzEwRs70Y/edit?usp=sharing"><strong>Google spreadsheet</strong></a></li>
+</ol>
+<p><img src="img/bonus_original_spreadsheet.png" width="50%" height="50%"></p>
+<ol start="2" type="a">
+<li>Make a copy of this in your own Google account by selecting <code>Make a copy</code> from the <code>File</code> menu item. When prompted, click on <code>Make a copy</code>. This will open a separate tab where the copy will be available.</li>
+</ol>
+<p><img src="img/bonus_make_copy.png" width="30%" height="30%"></p>
+<p><img src="img/bonus_copy.png" width="30%" height="30%"></p>
+<ol start="3" type="a">
+<li>Set access to shareable by clicking on the <code>Share</code> button at the top right of the screen. A dialogue screen will pop up, here, click on the <code>Restricted</code> button, select <code>Anyone with the link</code>, and click on <code>Done</code></li>
+</ol>
+<p><img src="img/bonus_share.png" width="30%" height="30%"></p>
+<ol start="4" type="a">
+<li>Now to publish the google spreadsheet click on the <code>File</code> menu item, select <code>Share</code>, and click on <code>Publish on web</code></li>
+</ol>
+<p><img src="img/bonus_publish.png" width="30%" height="30%"></p>
+<ol start="5" type="a">
+<li>In the popup message click on <code>Web page</code>, and select <code>Comma-separated values (.csv)</code>. Also, make sure the <code>Automatically republish when changes are made</code> option is turned on under the <code>Published content and settings</code> section</li>
+</ol>
+<p><img src="img/bonus_csv.png" width="30%" height="30%"></p>
+<p><img src="img/bonus_auto_publish.png" width="30%" height="30%"></p>
+<ol start="6" type="a">
+<li>Confirm your choices in the popup message clicking on <code>OK</code>. This will provide more details about your Google spreadsheet, copy the url.</li>
+</ol>
+<p><img src="img/bonus_publish_sure.png" width="30%" height="30%"></p>
+<p><img src="img/bonus_link.png" width="30%" height="30%"></p>
+<ol start="7" type="a">
+<li>Go to <a href="https://microreact.org"><strong>microreact.org</strong></a>, and select <code>Upload</code> from the main menu.</li>
+</ol>
+<p><img src="img/bonus_upload.png" width="10%" height="10%"></p>
+<ol start="8" type="a">
+<li>Select the plus icon at the bottom right, and click on <code>Add URLs</code></li>
+</ol>
+<p><img src="img/bonus_add_url.png" width="30%" height="30%"></p>
+<ol type="i">
+<li>Paste the url from step <em>f</em> and select <code>Data (CSV or TSV)</code> under <code>File kind</code>. Finally click on <code>CONTINUE</code> to see your microreact.</li>
+</ol>
+<p><img src="img/bonus_add_files.png" width="30%" height="30%"></p>
+<ol start="10" type="a">
+<li>You should get a screen like this!</li>
+</ol>
+<p><img src="img/bonus_final_mr.png" width="30%" height="30%"></p>
+<p><strong><em>The materials provided in this repository are FREE to use.</em></strong> <strong><em>This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.</em></strong></p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -2,10 +2,8 @@
 title: "Resources"
 ---
 
-The materials provided in this repository are FREE to use.
+Here you can find other Resources that are useful:
 
-This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.
+<https://mmbdtp.github.io/modules/sequencing/file-formats/>
 
-Participant feedback form can be accessed here:
-
-....
+<https://training.nextflow.io/basic_training/>

@@ -2,6 +2,6 @@
 title: "Agenda"
 ---
 
-The detailed agenda can be found [here](img/Agenda_CADA.pdf)
+The detailed agenda can be found [here](https://docs.google.com/document/d/1ccSbHb8QIDwbDwHtLyLSch2fQrQ92a10pVIGtL2jcjU/edit?usp=sharing).
 
-![Workshop workflow](img/workflow1.jpg){width="80%"}
+![](img/agenda.png){width="80%"}

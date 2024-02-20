@@ -1,5 +1,72 @@
 ---
-title: "Module4"
+title: "SESSION 4 - Genome Analysis with Pathogenwatch"
 ---
 
-module 4444
+### Module Leads: Julio Diaz Caballero, Natacha Couto, Georgina Lewis-Woodhouse, Emmanuelle Kumaran, Nabil Fareed-Alikhan, Sophia David, Monica Abrudan
+
+#### ***based on the exercise developed by Silvia Argimon***
+
+# Table of contents
+
+-   [Introduction](#intro)
+-   [Objectives](#learning-outcomes)
+-   [Genome analysis with Pathogenwatch](#analyse-genomes)
+
+# Introduction {#intro}
+
+Pathogenwatch provides a platform for comparing pathogen genome assemblies from around the world, integrating diverse data sets with rich representations. It provides species and taxonomy prediction for over 60,000 variants of bacteria, viruses, and fungi.
+
+# Objectives {#learning-outcomes}
+
+At the end of this session the participants will be able to:
+
+1.  Upload assemblies and metadata file to PW
+2.  Look at QC metrics provided by PW
+3.  Create a collection with the upload assemblies
+4.  Create a collection with the uploaded assemblies plus contextual genomes (Kp ST258 from Jan 2020 until now)
+5.  Explore the genomes in PW
+6.  Download the cgSNP trees
+7.  Download the MLST results
+8.  Download the AMR/virulence results
+
+# Genome analysis with Pathogenwatch {#analyse-genomes}
+
+`https://pathogen.watch`
+
+After obtaining the high quality assemblies, the user will use [**https://pathogen.watch**](https://pathogen.watch) to determine the sequence type (ST) of these genomes, build a tree and identify AMR/virulence determinants.
+
+Click on the upload link at the top right
+
+<img src="img/pathogenwatch_upload.png" width="70%" height="70%"/>
+
+Click on `Single Genome FASTAs`
+
+<img src="img/pathogenwatch_singlefasta.png" width="70%" height="70%"/>
+
+Drag and Drop provided fasta files ([file1](https://drive.google.com/file/d/1RFUCv7XEWoFkcw2atXRyGPoIfi9Z1K2g/view?usp=drive_link) and [file2](https://drive.google.com/file/d/1XoN-IbjduA785BNx4r8OUo1ljwaW03a_/view?usp=drive_link)) into the browser and wait for analysis to finish
+
+<img src="img/pathogenwatch_dragdrop.png" width="70%" height="70%"/>
+
+Click on `VIEW GENOMES`ll
+
+<img src="img/pathogenwatch_viewgenomes.png" width="70%" height="70%"/>
+
+Select the two analysed genomes
+
+<img src="img/pathogenwatch_select.png" width="70%" height="70%"/>
+
+Click on `Selected Genomes`
+
+<img src="img/pathogenwatch_selected.png" width="70%" height="70%"/>
+
+Click on Download data
+
+<img src="img/pathogenwatch_download.png" width="70%" height="70%"/>
+
+Click on MLST (Pasteur). This will download a csv file with the results.
+
+<img src="img/pathogenwatch_mlst.png" width="70%" height="70%"/>
+
+You should now be able to find the following files on your `Downloads` folder: [`mlst-Pasteur.csv`](https://drive.google.com/file/d/1dpagR9zHyk1WtJhvfsWqskwZhNc8Enax/view?usp=drive_link) [`tree.nwk`]()
+
+***The materials provided in this repository are FREE to use.*** ***This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.***

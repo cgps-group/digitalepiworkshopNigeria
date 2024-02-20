@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Digital Epidemiology Workshop GHRU Oxford - GHRU Ibadan, March 2024 - Module4</title>
+<title>Pathogen Genomics Week GHRU Oxford - March 2024 - SESSION 4 - Genome Analysis with Pathogenwatch</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -76,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
     <img src="../img/cgps.jpg" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Digital Epidemiology Workshop GHRU Oxford - GHRU Ibadan, March 2024</span>
+    <span class="navbar-title">Pathogen Genomics Week GHRU Oxford - March 2024</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -95,7 +95,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../Syllabus.html" rel="" target="">
- <span class="menu-text">Syllabus</span></a>
+ <span class="menu-text">Digital Epidemiology</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../bioinformatics.html" rel="" target="">
+ <span class="menu-text">Bioinformatics</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-training-materials" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
@@ -112,31 +116,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../module3/module3.html" rel="" target="">
- <span class="dropdown-text">Module3</span></a>
+ <span class="dropdown-text">SESSION 3 - Introduction to Trimming, Assembly and QC</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../module4/module4.html" rel="" target="">
- <span class="dropdown-text">Module4</span></a>
+ <span class="dropdown-text">SESSION 4 - Genome Analysis with Pathogenwatch</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../module5/module5.html" rel="" target="">
- <span class="dropdown-text">Module5</span></a>
+ <span class="dropdown-text">SESSION 5 - Data integration with Data-flo</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../module6/module6.html" rel="" target="">
- <span class="dropdown-text">Module6</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../module7/module7.html" rel="" target="">
- <span class="dropdown-text">Module7</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../module8/module8.html" rel="" target="">
- <span class="dropdown-text">Module8</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../hands-on/exercise.html" rel="" target="">
- <span class="dropdown-text">Digital Epidemiology hands-on exercise</span></a>
+ <span class="dropdown-text">SESSION 6 - Data visualisation and Interpretation with Microreact</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../resources.html" rel="" target="">
@@ -151,69 +143,10 @@ ul.task-list li input[type="checkbox"] {
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Module4</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
- <span class="menu-text">Data-flo step-by-step tutorial</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../data-flo/data-flo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data-flo tutorial</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
- <span class="menu-text">Microreact step-by-step tutorial</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../microreact/microreact.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Microreact tutorial</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -221,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module4</h1>
+<h1 class="title">SESSION 4 - Genome Analysis with Pathogenwatch</h1>
 </div>
 
 
@@ -236,9 +169,63 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>module 4444</p>
+<section id="module-leads-julio-diaz-caballero-natacha-couto-georgina-lewis-woodhouse-emmanuelle-kumaran-nabil-fareed-alikhan-sophia-david-monica-abrudan" class="level3">
+<h3 class="anchored" data-anchor-id="module-leads-julio-diaz-caballero-natacha-couto-georgina-lewis-woodhouse-emmanuelle-kumaran-nabil-fareed-alikhan-sophia-david-monica-abrudan">Module Leads: Julio Diaz Caballero, Natacha Couto, Georgina Lewis-Woodhouse, Emmanuelle Kumaran, Nabil Fareed-Alikhan, Sophia David, Monica Abrudan</h3>
+<section id="based-on-the-exercise-developed-by-silvia-argimon" class="level4">
+<h4 class="anchored" data-anchor-id="based-on-the-exercise-developed-by-silvia-argimon"><strong><em>based on the exercise developed by Silvia Argimon</em></strong></h4>
+</section>
+</section>
+<section id="table-of-contents" class="level1">
+<h1>Table of contents</h1>
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#learning-outcomes">Objectives</a></li>
+<li><a href="#analyse-genomes">Genome analysis with Pathogenwatch</a></li>
+</ul>
+</section>
+<section id="intro" class="level1">
+<h1>Introduction</h1>
+<p>Pathogenwatch provides a platform for comparing pathogen genome assemblies from around the world, integrating diverse data sets with rich representations. It provides species and taxonomy prediction for over 60,000 variants of bacteria, viruses, and fungi.</p>
+</section>
+<section id="learning-outcomes" class="level1">
+<h1>Objectives</h1>
+<p>At the end of this session the participants will be able to:</p>
+<ol type="1">
+<li>Upload assemblies and metadata file to PW</li>
+<li>Look at QC metrics provided by PW</li>
+<li>Create a collection with the upload assemblies</li>
+<li>Create a collection with the uploaded assemblies plus contextual genomes (Kp ST258 from Jan 2020 until now)</li>
+<li>Explore the genomes in PW</li>
+<li>Download the cgSNP trees</li>
+<li>Download the MLST results</li>
+<li>Download the AMR/virulence results</li>
+</ol>
+</section>
+<section id="analyse-genomes" class="level1">
+<h1>Genome analysis with Pathogenwatch</h1>
+<p><code>https://pathogen.watch</code></p>
+<p>After obtaining the high quality assemblies, the user will use <a href="https://pathogen.watch"><strong>https://pathogen.watch</strong></a> to determine the sequence type (ST) of these genomes, build a tree and identify AMR/virulence determinants.</p>
+<p>Click on the upload link at the top right</p>
+<p><img src="img/pathogenwatch_upload.png" width="70%" height="70%"></p>
+<p>Click on <code>Single Genome FASTAs</code></p>
+<p><img src="img/pathogenwatch_singlefasta.png" width="70%" height="70%"></p>
+<p>Drag and Drop provided fasta files (<a href="https://drive.google.com/file/d/1RFUCv7XEWoFkcw2atXRyGPoIfi9Z1K2g/view?usp=drive_link">file1</a> and <a href="https://drive.google.com/file/d/1XoN-IbjduA785BNx4r8OUo1ljwaW03a_/view?usp=drive_link">file2</a>) into the browser and wait for analysis to finish</p>
+<p><img src="img/pathogenwatch_dragdrop.png" width="70%" height="70%"></p>
+<p>Click on <code>VIEW GENOMES</code>ll</p>
+<p><img src="img/pathogenwatch_viewgenomes.png" width="70%" height="70%"></p>
+<p>Select the two analysed genomes</p>
+<p><img src="img/pathogenwatch_select.png" width="70%" height="70%"></p>
+<p>Click on <code>Selected Genomes</code></p>
+<p><img src="img/pathogenwatch_selected.png" width="70%" height="70%"></p>
+<p>Click on Download data</p>
+<p><img src="img/pathogenwatch_download.png" width="70%" height="70%"></p>
+<p>Click on MLST (Pasteur). This will download a csv file with the results.</p>
+<p><img src="img/pathogenwatch_mlst.png" width="70%" height="70%"></p>
+<p>You should now be able to find the following files on your <code>Downloads</code> folder: <a href="https://drive.google.com/file/d/1dpagR9zHyk1WtJhvfsWqskwZhNc8Enax/view?usp=drive_link"><code>mlst-Pasteur.csv</code></a> <a href=""><code>tree.nwk</code></a></p>
+<p><strong><em>The materials provided in this repository are FREE to use.</em></strong> <strong><em>This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.</em></strong></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

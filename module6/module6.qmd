@@ -1,5 +1,179 @@
 ---
-title: "Module6"
+title: "SESSION 6 - Data visualisation and Interpretation with Microreact"
 ---
 
-666
+### Module Leads: Julio Diaz Caballero, Natacha Couto, Georgina Lewis-Woodhouse, Emmanuelle Kumaran, Nabil Fareed-Alikhan, Sophia David, Monica Abrudan
+
+#### ***based on the exercise developed by Silvia Argimon***
+
+# Table of contents
+
+-   [Introduction](#intro)
+-   [Objectives](#learning-outcomes)
+-   [Data visualisation and Interpretation with Microreact](#interpret-genomes)
+-   [Sign-in to Microreact](#sign-in-to-microreact)
+-   [Web colours](#web-colours)
+-   [Bonus activities](#bonus-activities)
+
+# Introduction {#intro}
+
+Microreact (https://microreact.org/) is a web-based application for the provision of interactive data visualisations. It enables the rapid generation and linkage of trees, maps, networks, charts and timelines, enabling epidemiologists and key decision makers to react faster and with greater accuracy. Microreact can be deployed securely on a local server, behind firewalls and adhering to local data governance. Users can make their Microreact projects findable on the network, or share them privately with another user by sharing a downloaded project or using secret links. Microreact projects for public consumption can be shared on the public Microreact site.
+
+# Objectives {#learning-outcomes}
+
+At the end of this session the participants will be able to:
+
+1.  Visualise a tree, metadata, a timeline and a map using Microreact
+2.  Use slices in Microreact
+3.  Create Views in Microreact
+4.  Interpret the results
+
+# Data visualisation and Interpretation with Microreact {#interpret-genomes}
+
+`https://microreact.org/`
+
+Open the Microreact link in the output from data-flo. It should look something like this:
+
+<img src="img/microreact_link.png" width="50%" height="50%"/>
+
+Now change the colour column to "Source". Click on the eye icon at the top right of the page. Select "Source" from the `Colour Column` dropdown list.
+
+<img src="img/microreact_colour.png" width="50%" height="50%"/>
+
+Scale the markers on the map by clicking on the sliders icon, then in the opening options click on `Markers`. Finally, toggle the `Scale markers` option on.
+
+<img src="img/microreact_markers.png" width="50%" height="50%"/>
+
+Change the colour column to "Source". Click on the eye icon at the top left of the page. Then select "Source" from the `Colour Column` dropdown list.
+
+<img src="img/microreact_source.png" width="50%" height="50%"/>
+
+Microreact assigns colours automatically to every column in your metadata table, but you can customise them. Let's change the colour column to "Infection Type". Click on the eye icon at the top left of the page. Then select "Infection Type" from the `Colour Column` dropdown list.
+
+<img src="img/microreact_household.png" width="50%" height="50%"/>
+
+Now Select "Categorical" from the `Colour Palette` option. Next Select "qualitative" from the `Palette type` dropdown list and "10" from the `Number of colours` dropdown list. Finally, select the second option from the list of palettes.
+
+<img src="img/microreact_palette.png" width="50%" height="50%"/>
+
+Change the colour column to "Hospital" and add the columns "Source" and "Ward" as metadata blocks. For this, select the slider icon from top right of the tree panel, then, click on the `Metadata blocks` button. Finally, select "Source" and "Household" from the list of options.
+
+<img src="img/microreact_metadata_blocks.png" width="50%" height="50%"/>
+
+# Sign-in to Microreact {#sign-in-to-microreact}
+
+Head over to [**https://microreact.org/my-account**](https://microreact.org/my-account), and sign up using your email address or any other authenticating option
+
+!<img src="img/microreact_signup.png" width="30%" height="30%"/>
+
+# Web colours {#web-colours}
+
+Web colours are used on web pages, such as the microreact.org projects, and are usually specified in hexadecimal format preceded by ​​a number sign (or hashtag sign if you were born before the Jurassic period). For example, `#FFFFFF` is the hexadecimal code (or hex code) for the colour "white", `#000000` is the hex code for the colour "black", and `#FF00FF` is the hex code for the colour "magenta". For more information on the format of the hexadecimal code see Wikipedia page [**https://en.wikipedia.org/wiki/Web_colors**](https://en.wikipedia.org/wiki/Web_colors)
+
+Useful websites to work with web colours:
+
+### ColorBrewer
+
+[**https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3**](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) Colour palettes for maps
+
+### ColorHexa
+
+[**https://www.colorhexa.com/**](https://www.colorhexa.com/) Get complementary colours, colour gradients, etc.
+
+### Coolors
+
+[**https://coolors.co/palettes/trending**](https://coolors.co/palettes/trending) Colour palette generator
+
+### Wes Anderson colour palettes
+
+[**https://github.com/karthik/wesanderson**](https://github.com/karthik/wesanderson) Hipster colour palettes inspired by Wes Anderson movies
+
+# Bonus activities {#bonus-activities}
+
+### 1. Create a microreact project using a metadata in csv format and a phylogenetic tree.
+
+a.  Click on the menu icon at the top left of the screen
+
+<img src="img/microreact_menu_icon.png" width="40%" height="40%"/>
+
+b.  Click on `Upload`
+
+<img src="img/microreact_upload_option.png" width="30%" height="30%"/>
+
+c.  Click on the `+` symbol at the bottom right of the screen.
+
+<img src="img/microreact_plus_icon.png" width="10%" height="10%"/>
+
+d.  Select `Browse Files`
+
+<img src="img/microreact_browse_files.png" width="20%" height="20%"/>
+
+e.  Choose the files [`tree.nwk`](https://drive.google.com/file/d/1R8nyAXNaiGIBL-2u30sD-W5Ajy-VNUeR/view?usp=drive_link) and [`epi_data.csv`](https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link), and click on the `Open` button (These files were downloaded in the [dataflo](#merge-data-with-data-flo) section).
+
+f.  Click on `Continue` in the next prompts.
+
+g.  Your view will look like this:
+
+<img src="img/microreact_bonus_view.png" width="30%" height="30%"/>
+
+h.  You can add a Timeline by clicking on the `pencil` icon at the top left of the screen, and clicking on `Create New Timeline`
+
+<img src="img/microreact_pencil_icon.png" width="50%" height="50%"/>
+
+i.  Then position the new panel by dragging the pointer to the bottom panel.
+
+<img src="img/microreact_bottom_panel.png" width="50%" height="50%"/>
+
+j.  Finally, select "One column: Formatted Values" from the `Temporal Data Type` dropdown list, and "Collection Date" from the `Temporal Data Column` dropdown list. Click on `CLOSE`
+
+<img src="img/microreact_temp_data_type.png" width="50%" height="50%"/>
+
+## 2. Create a Microreact project from a Google Spreadsheet
+
+a.  Open this [**Google spreadsheet**](https://docs.google.com/spreadsheets/d/1DN6fyhHmmkgEU0Ml7Ep_y_2l_JpQZkBfmXZzEwRs70Y/edit?usp=sharing)
+
+<img src="img/bonus_original_spreadsheet.png" width="50%" height="50%"/>
+
+b.  Make a copy of this in your own Google account by selecting `Make a copy` from the `File` menu item. When prompted, click on `Make a copy`. This will open a separate tab where the copy will be available.
+
+<img src="img/bonus_make_copy.png" width="30%" height="30%"/>
+
+<img src="img/bonus_copy.png" width="30%" height="30%"/>
+
+c.  Set access to shareable by clicking on the `Share` button at the top right of the screen. A dialogue screen will pop up, here, click on the `Restricted` button, select `Anyone with the link`, and click on `Done`
+
+<img src="img/bonus_share.png" width="30%" height="30%"/>
+
+d.  Now to publish the google spreadsheet click on the `File` menu item, select `Share`, and click on `Publish on web`
+
+<img src="img/bonus_publish.png" width="30%" height="30%"/>
+
+e.  In the popup message click on `Web page`, and select `Comma-separated values (.csv)`. Also, make sure the `Automatically republish when changes are made` option is turned on under the `Published content and settings` section
+
+<img src="img/bonus_csv.png" width="30%" height="30%"/>
+
+<img src="img/bonus_auto_publish.png" width="30%" height="30%"/>
+
+f.  Confirm your choices in the popup message clicking on `OK`. This will provide more details about your Google spreadsheet, copy the url.
+
+<img src="img/bonus_publish_sure.png" width="30%" height="30%"/>
+
+<img src="img/bonus_link.png" width="30%" height="30%"/>
+
+g.  Go to [**microreact.org**](https://microreact.org), and select `Upload` from the main menu.
+
+<img src="img/bonus_upload.png" width="10%" height="10%"/>
+
+h.  Select the plus icon at the bottom right, and click on `Add URLs`
+
+<img src="img/bonus_add_url.png" width="30%" height="30%"/>
+
+i.  Paste the url from step *f* and select `Data (CSV or TSV)` under `File kind`. Finally click on `CONTINUE` to see your microreact.
+
+<img src="img/bonus_add_files.png" width="30%" height="30%"/>
+
+j.  You should get a screen like this!
+
+<img src="img/bonus_final_mr.png" width="30%" height="30%"/>
+
+***The materials provided in this repository are FREE to use.*** ***This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.***
