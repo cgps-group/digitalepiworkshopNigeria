@@ -16,15 +16,17 @@ title: "SESSION 3 - Introduction to Trimming, Assembly and QC"
 
 *Note: This exercise is a work of fiction. Any resemblance to a real life situation is purely coincidental.*
 
-In December 2020, three cases of primary bloodstream infections sustained by ertapenem-resistant *Klebsiella pneumoniae* were observed over a two-month period in the neonatal intensive care unit (NICU) at the University College Hospital in Ibadan, Oyo State. The NICU consists of a 15-bed tertiary level ward. Faecal screening of all admitted neonates was performed. Ten additional samples from the environment were collected. A plan of the NICU and sample collection can be seen below.
+In December 2020, three cases of primary bloodstream infections sustained by ertapenem-resistant *Klebsiella pneumoniae* were observed over a two-month period in the neonatal intensive care unit (NICU) at the University College Hospital in Ibadan, Oyo State. This NICU consists of a 15-bed tertiary level ward. Since the detectionf of these infections, faecal screening of all admitted neonates was performed. Additionally, ten samples from the environment were collected. The epidemiological and demographic data is summarised in the file [epi_data.csv](data/epi_data.csv).
 
-<img src="img/unit.png" width="70%" height="70%"/>
+<img src="img/unit.png" width="70%" height="70%"/><br/>
+Plan of the NICU. Locations of sample collection is indicated with light blue circles.
+<br/><br/>
 
-The reference lab has sent you the culture results in an Excel file called ([`lab_results.xlsx`](data/lab_results.xlsx)). Faecal screening of all admitted neonates, revealed that **five other neonates** were carriers of *K. pneumoniae*. The lab reported that **2 out of 10** environmental samples were positive for *K. pneumoniae*. **This immediately prompted the closure of 1 room.**
+The reference lab sent you the culture results from the faecal screening and the environmental sampling in an Excel file called ([`lab_results.xlsx`](data/lab_results.xlsx)). Faecal screening of the admitted neonates, revealed that **five other neonates** were carriers of *K. pneumoniae*. Also, the lab reported that **2 out of 10** environmental samples were positive for *K. pneumoniae*. **This immediately prompted the closure of 1 room.**
 
-One colony from each confirmed case and two from the environment were sent to the GHRU-Ibadan unit for sequencing. The epidemiological and demographic data is summarised in the file [epi_data.csv](data/epi_data.csv).
+One colony from each confirmed case and from each of Ithe two positive environmental samples were sent to the GHRU-Ibadan unit for sequencing. 
 
-It is up to the user to now investigate the possibility of an outbreak of *K. pneumoniae* in the neonatal unit using the GHRU assembly pipeline, Pathogenwatch, data-flo and Microreact, free web applications developed by the Centre for Genomic Pathogen Surveillance for data analyses, integration and visualisation.
+It is now up to you to investigate the possibility of an outbreak of *K. pneumoniae* in the neonatal unit using the raw sequencing data, the GHRU assembly pipeline, Pathogenwatch, data-flo and Microreact, free web applications developed by the Centre for Genomic Pathogen Surveillance for data analyses, integration and visualisation.
 
 # Objectives {#learning-outcomes}
 
@@ -37,14 +39,154 @@ At the end of this session the participants will be able to:
 
 # Trim, assemble and QC with GHRU Nextflow pipeline {#obtain-high-quality-assemblies}
 
-`https://gitlab.com/cgps/ghru/pipelines/assembly`
+`https://gitlab.com/cgps/ghru/pipelines/assembly` <@Nabil, could you check if this is available to non CGPS people>
 
-At this point, the user is given 22 fastq files. The GHRU assembly pipeline uses a workflow implemented in Nextflow to process Illumina short-read fastq files and convert them to assemblies using the [SPAdes assembler](https://github.com/ablab/spades). Additionally, the workflow includes a quality control before and after trimming with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic). The final assemblies are also quality controled using [QUAST](https://quast.sourceforge.net/quast).
+## Hardware
 
-First download Nextflow: `curl -s https://get.nextflow.io | bash`
+For this exercise you will use our bioinformatics servers. Connecting to our bioinformatics servers ensure the computational resources required for the assembly process are available.
 
-To download the GHRU Assembly pipeline download the code: `curl https://gitlab.com/cgps/ghru/pipelines/assembly.git`
+To connect to our bioinformatics servers, follow the instructions below. Replace `user` with your username and `ghru-assembly` with the name of the server you want to connect to. You will need to enter your password when prompted.:
 
-To run the pipeline: `./nextflow run assembly.nf \ --adapter_file adapters.fas \ --qc_conditions qc_conditions_nextera_relaxed_dev.yml \ --input_dir input_data \ --fastq_pattern '*{R,_}{1,2}.f*q.gz' \ --output_dir assemblies \ --depth_cutoff 100 \ --prescreen_file_size_check 12 \ --confindr_db_path /path_to/confindr_database \ --careful \ --kmer_min_copy 3 \ --skip_quast_summary \ --skip_quast_multiqc \ --skip_fastqc_multiqc \ -w work \ -qs 1000 -resume`
+```bash <@Nabil modofy accordingly>
+# Connect to the server
+ssh  user@ghru-assembly
+```
+
+## Data
+
+You will find 11 sets of paired-end Illumina reads in the `/data/`<@Nabil please check the raw data is here> directory. Thus, this directory will contain 22 fastq files (two per genome). You can check the data is actually there:
+
+```bash
+# Check the contents of the /data/ directory
+ls /data/
+```
+
+The /data directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA folling the instructions in the [fetching data](#fetching-data)  bonus section.
+
+## Software
+
+The assembly process pipeline will process each pair of Illumina short-read fastq files and assemble them using the [SPAdes assembler](https://github.com/ablab/spades). Along the assembly process, the workflow will perform quality control checks and filters. Some of the most important steps are:
+
+1.  Trimming of Illumina adapters and low quality bases using [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+2.  Quality control of the reads using [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+3.  Assembly of the reads using SPAdes
+4.  Quality control of the assemblies using [QUAST](http://quast.sourceforge.net/)
+
+
+Nextflow is already installed in our bioinformatics servers, and the assembly pipeline can be found in `/path/to/pipeline` <@Nabil please change this to fit the image structure>. Let's check that nextflow is installed and that we can find the assembly pipeline:
+
+```bash
+# Check that nextflow is installed
+nextflow -v
+# Check the assembly pipeline can be found at /path/to/pipeline directory <@Nabil please change this as well>
+ls /path/to/pipeline
+```
+
+If `nextflow` or the assembly pipeline are not installed, you can install them by following the instructions in the [install nextflow](#install-nextflow) or [install pipeline](#install-pipeline) bonus sections.
+
+## Implementation
+
+First we need to create a directory to store the assemblies. We will call this directory `results`. You can create this directory with the following command:
+
+```bash
+# Create the results directory
+mkdir /results
+```
+
+Next, let's create a directory to store the implementation scripts and the working directory. We will call this directory `scripts`. You can create this directory with the following command:
+
+```bash
+# Create the scripts directory
+mkdir /scripts
+```
+
+Now we create a script to run the assembly pipeline. You can create a file called `assembly.sh` in the `scripts` directory using a text editor such as `nano` or `vim`. You can copy and paste the following code into the file and save it:
+
+```bash <@Nabil we need to modify this to specificy adapter_file, confindr database, and qc conditions yaml file>
+#!/bin/bash
+NEXTFLOW_WORKFLOWS_DIR='/path/tp/pipeline'
+INPUT_DIR='/data'
+OUTPUT_DIR='/results'
+
+nextflow run ${NEXTFLOW_WORKFLOWS_DIR}/assembly.nf 
+    --adapter_file adapters.fas 
+    --qc_conditions qc_conditions_nextera_relaxed_dev.yml
+    --input_dir ${INPUT_DIR}
+    --fastq_pattern '*{R,_}{1,2}.f*q.gz'
+    --output_dir ${OUTPUT_DIR}
+    --depth_cutoff 100
+    --prescreen_file_size_check 12
+    --confindr_db_path /path/to/confindr_database
+    --careful
+    --kmer_min_copy 3
+    -w ${OUTPUT_DIR}/work
+    -resume
+```
+
+Finally, you can run the assembly pipeline by executing the script:
+
+```bash
+# Run the assembly pipeline
+bash /scripts/assembly.sh
+```
+
+## Results
+
+The assembly pipeline will create six directories in the `assemblies` directory. 
+
+```bash
+# Check the contents of the /results directory
+ls /results
+```
+
+You will find the fasta-formatted assemblies in the `assemblies` directory. There, you will find `pass`, `warning`, and `failure` directories containing the assemblies according to their quality. You can check the contents of the `assemblies` directory:
+
+```bash
+# Check the contents of the /results/assemblies directory 
+ls /results/assemblies
+```
+
+Additonally you will find the `quality_reports` directory containing the quality control reports for the assemblies. You can check the contents of the `quality_reports` directory:
+
+```bash
+# Check the contents of the /results/quality_reports directory
+ls /results/quality_reports
+```
+
+You may want to import the quality report (`results/quality_reports/qualifyr_report.tsv`) to your local machine so as to explore whether the assemblies are of high quality or not. You can use the `scp` command to do this:
+
+```bash <@Nabil please provide a proper username:address combination>
+# Copy the quality report to your local machine
+scp user@ghru-assembly:/results/quality_reports/qualifyr_report.tsv /path/to/local/machine
+```
+
+You can use the same commad to copy the assemblies to your local machine (hint: `scp -r` helps you move an entire directory). 
+
+# Bonus Materials
+
+## Fetching data {#fetching-data}
+
+You can use tools sucha as `wget` or `curl` to fetch data from a remote location such as Figshare, ENA or SRA. For example, you can fetch the data from the following Figshare link:
+
+```bash <@Nabil please check this link>
+# Fetch the data from Figshare
+wget https://figshare.com/ndownloader/articles/25266367/versions/1 -O /data/fastqs.zip
+# Unzip the data
+unzip /data/fastqs.zip -d /data
+```
+
+## Install nextflow {#install-nextflow}
+
+This may be a bit of work, but you can install nextflow by following the instructions in the following link: https://www.nextflow.io/docs/latest/getstarted.html
+
+## Install assembly pipeline {#install-pipeline}
+
+To install the assembly pipeline, you can clone the repository from the following link:
+
+```bash
+# Clone the assembly pipeline
+git clone https://gitlab.com/cgps/ghru/pipelines/assembly.git
+```
 
 ***The materials provided in this repository are FREE to use.*** ***This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.***
+
