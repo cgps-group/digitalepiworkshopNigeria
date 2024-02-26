@@ -16,15 +16,15 @@ title: "SESSION 3 - Introduction to Trimming, Assembly and QC"
 
 *Note: This exercise is a work of fiction. Any resemblance to a real life situation is purely coincidental.*
 
-In December 2020, three cases of primary bloodstream infections sustained by ertapenem-resistant *Klebsiella pneumoniae* were observed over a two-month period in the neonatal intensive care unit (NICU) at the University College Hospital in Ibadan, Oyo State. This NICU consists of a 15-bed tertiary level ward. Since the detectionf of these infections, faecal screening of all admitted neonates was performed. Additionally, ten samples from the environment were collected. The epidemiological and demographic data is summarised in the file [epi_data.csv](data/epi_data.csv).
+In December 2020, three cases of primary bloodstream infections sustained by ertapenem-resistant *Klebsiella pneumoniae* were observed over a two-week period in the neonatal intensive care unit (NICU) at the University College Hospital in Ibadan, Oyo State. This NICU consists of a 15-bed tertiary level ward. Since the detection of these infections, faecal screening of all admitted neonates was performed. Additionally, ten samples from the environment were collected. The epidemiological and demographic data is summarised in the file [epi_data.csv](data/epi_data.csv).
 
 <img src="img/unit.png" width="70%" height="70%"/><br/>
 Plan of the NICU. Locations of sample collection is indicated with light blue circles.
 <br/><br/>
 
-The reference lab sent you the culture results from the faecal screening and the environmental sampling in an Excel file called ([`lab_results.xlsx`](data/lab_results.xlsx)). Faecal screening of the admitted neonates, revealed that **five other neonates** were carriers of *K. pneumoniae*. Also, the lab reported that **2 out of 10** environmental samples were positive for *K. pneumoniae*. **This immediately prompted the closure of 1 room.**
+The reference lab sent you the culture results from the faecal, bloodstream, and environmental sampling in an Excel file called ([`lab_results.xlsx`](data/lab_results.xlsx)). Faecal screening of the admitted neonates, revealed that **five other neonates** were carriers of *K. pneumoniae*. Also, the lab reported that **2 out of 10** environmental samples were positive for *K. pneumoniae*. **This immediately prompted the closure of 1 room.**
 
-One colony from each confirmed case and from each of Ithe two positive environmental samples were sent to the GHRU-Ibadan unit for sequencing. 
+One colony from each confirmed case and from each of the two positive environmental samples were sent to the GHRU-Ibadan unit for sequencing. 
 
 It is now up to you to investigate the possibility of an outbreak of *K. pneumoniae* in the neonatal unit using the raw sequencing data, the GHRU assembly pipeline, Pathogenwatch, data-flo and Microreact, free web applications developed by the Centre for Genomic Pathogen Surveillance for data analyses, integration and visualisation.
 
@@ -61,7 +61,7 @@ You will find 11 sets of paired-end Illumina reads in the `/data/`<@Nabil please
 ls /data/
 ```
 
-The /data directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA folling the instructions in the [fetching data](#fetching-data)  bonus section.
+The /data directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA following the instructions in the [fetching data](#fetching-data)  bonus section.
 
 ## Software
 
@@ -160,13 +160,13 @@ You may want to import the quality report (`results/quality_reports/qualifyr_rep
 scp user@ghru-assembly:/results/quality_reports/qualifyr_report.tsv /path/to/local/machine
 ```
 
-You can use the same commad to copy the assemblies to your local machine (hint: `scp -r` helps you move an entire directory). 
+You can use the same command to copy the assemblies to your local machine (hint: `scp -r` helps you move an entire directory). 
 
 # Bonus Materials
 
 ## Fetching data {#fetching-data}
 
-You can use tools sucha as `wget` or `curl` to fetch data from a remote location such as Figshare, ENA or SRA. For example, you can fetch the data from the following Figshare link:
+You can use tools such as `wget` or `curl` to fetch data from a remote location such as Figshare, ENA or SRA. For example, you can fetch the data from the following Figshare link:
 
 ```bash <@Nabil please check this link>
 # Fetch the data from Figshare
