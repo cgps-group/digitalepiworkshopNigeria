@@ -50,9 +50,7 @@ To connect to our bioinformatics servers, follow the instructions below. Replace
 
 ```bash
 # Connect to the server
-ssh  user1@159.65.95.44
-# OR 
-ssh  user2@159.65.95.44
+ssh user@159.65.95.44
 ```
 
 ## Data
@@ -91,18 +89,18 @@ Nextflow should be preconfigured for you, but if you want to try this on another
 
 ## Implementation
 
-First we need to create a directory to store the assemblies. We will call this directory `results`. You can create this directory with the following command:
+First we need to create a directory to store the assemblies. We will call this directory `results`. You can create this directory with the following command, replace `user` with your username:
 
 ```bash
 # Create the results directory
-mkdir /workshop/<username>/results
+mkdir /workshop/user/results
 ```
 
-Next, let's create a directory to store the implementation scripts and the working directory. We will call this directory `scripts`. You can create this directory with the following command:
+Next, let's create a directory to store the implementation scripts and the working directory. We will call this directory `scripts`. You can create this directory with the following command, replace `user` with your username:
 
 ```bash
 # Create the scripts directory
-mkdir /workshop/<username>/scripts
+mkdir /workshop/user/scripts
 ```
 
 Now we create a script to run the assembly pipeline. You can create a file called `assembly.sh` in the `scripts` directory using a text editor such as `nano` or `vim`. You can copy and paste the following code into the file and save it:
@@ -130,43 +128,41 @@ nextflow run ${NEXTFLOW_WORKFLOWS_DIR}/main.nf
     -resume
 ```
 
-Finally, you can run the assembly pipeline by executing the script:
+Finally, you can run the assembly pipeline by executing the script, replace `user` with your username:
 
 ```bash
 # Run the assembly pipeline
-bash /workshop/<username>/scripts/assembly.sh
+bash /workshop/user/scripts/assembly.sh
 ```
 
 ## Results
 
-The assembly pipeline will create six directories in the `assemblies` directory. 
+The assembly pipeline will create six directories in the `assemblies` directory, replace `user` with your username. 
 
 ```bash
 # Check the contents of the /results directory
 ls /workshop/user/results
 ```
 
-You will find the fasta-formatted assemblies in the `assemblies` directory. There, you will find `pass`, `warning`, and `failure` directories containing the assemblies according to their quality. You can check the contents of the `assemblies` directory:
+You will find the fasta-formatted assemblies in the `assemblies` directory. There, you will find `pass`, `warning`, and `failure` directories containing the assemblies according to their quality. You can check the contents of the `assemblies` directory, replace `user` with your username:
 
 ```bash
 # Check the contents of the /results/assemblies directory 
 ls /workshop/user/results
 ```
 
-Additonally you will find the `quality_reports` directory containing the quality control reports for the assemblies. You can check the contents of the `quality_reports` directory:
+Additonally you will find the `quality_reports` directory containing the quality control reports for the assemblies. You can check the contents of the `quality_reports` directory, replace `user` with your username:
 
 ```bash
 # Check the contents of the /results/quality_reports directory
 ls /workshop/user/results/quality_reports
 ```
 
-You may want to import the quality report (`results/quality_reports/qualifyr_report.tsv`) to your local machine so as to explore whether the assemblies are of high quality or not. You can use the `scp` command to do this:
+You may want to import the quality report (`results/quality_reports/qualifyr_report.tsv`) to your local machine so as to explore whether the assemblies are of high quality or not. You can use the `scp` command to do this, replace `user` with your username:
 
 ```bash
 # Copy the quality report to your local machine
-scp user2@159.65.95.44:/workshop/user/results/quality_reports/qualifyr_report.tsv /path/to/local/machine
-# OR 
-scp user1@159.65.95.44:/workshop/user/results/quality_reports/qualifyr_report.tsv /path/to/local/machine
+scp user@159.65.95.44:/workshop/user/results/quality_reports/qualifyr_report.tsv /path/to/local/machine
 ```
 
 You will be prompted for your password. You can use the same command to copy the assemblies to your local machine (hint: `scp -r` helps you move an entire directory). 
