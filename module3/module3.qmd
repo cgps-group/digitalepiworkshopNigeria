@@ -39,22 +39,25 @@ At the end of this session the participants will be able to:
 
 # Trim, assemble and QC with GHRU Nextflow pipeline {#obtain-high-quality-assemblies}
 
-`https://gitlab.com/cgps/ghru/pipelines/assembly` <@Nabil, could you check if this is available to non CGPS people>
+The pipeline we will be using is available here `https://gitlab.com/cgps/ghru/pipelines/dsl2/pipelines/assembly`
 
 ## Hardware
 
-For this exercise you will use our bioinformatics servers. Connecting to our bioinformatics servers ensure the computational resources required for the assembly process are available.
+For this exercise you will use our pre configured bioinformatics servers. Connecting to our bioinformatics servers ensure the computational resources required for the assembly process are available. If you wish to run through this module on another
+platform, you will need to install the required software and download the sample data yourself. 
 
-To connect to our bioinformatics servers, follow the instructions below. Replace `user` with your username and `ghru-assembly` with the name of the server you want to connect to. You will need to enter your password when prompted.:
+To connect to our bioinformatics servers, follow the instructions below. Replace `user` with your username and `ghru-assembly` with the name of the server you want to connect to. You will need to enter your password when prompted. Your password will be provided to you by one of the instructors:
 
-```bash <@Nabil modofy accordingly>
+```bash
 # Connect to the server
-ssh  user@ghru-assembly
+ssh  user1@159.65.95.44
+# OR 
+ssh  user2@159.65.95.44
 ```
 
 ## Data
 
-You will find 11 sets of paired-end Illumina reads in the `/data/`<@Nabil please check the raw data is here> directory. Thus, this directory will contain 22 fastq files (two per genome). You can check the data is actually there:
+You will find 11 sets of paired-end Illumina reads in the `/data/`. Thus, this directory will contain 22 fastq files (two per genome). You can check the data is actually there:
 
 ```bash
 # Check the contents of the /data/ directory
@@ -62,6 +65,8 @@ ls /data/
 ```
 
 The /data directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA following the instructions in the [fetching data](#fetching-data)  bonus section.
+
+If you wish to download a new copy of the sample data, there are instructions in the [Fetching data](#fetching-data) bonus sections. 
 
 ## Software
 
@@ -73,16 +78,16 @@ The assembly process pipeline will process each pair of Illumina short-read fast
 4.  Quality control of the assemblies using [QUAST](http://quast.sourceforge.net/)
 
 
-Nextflow is already installed in our bioinformatics servers, and the assembly pipeline can be found in `/path/to/pipeline` <@Nabil please change this to fit the image structure>. Let's check that nextflow is installed and that we can find the assembly pipeline:
+Nextflow is already installed in our bioinformatics servers, and the assembly pipeline can be found in `/opt/ghru-assembly`. Let's check that nextflow is installed and that we can find the assembly pipeline:
 
 ```bash
 # Check that nextflow is installed
 nextflow -v
 # Check the assembly pipeline can be found at /path/to/pipeline directory <@Nabil please change this as well>
-ls /path/to/pipeline
+ls /opt/ghru-assembly
 ```
 
-If `nextflow` or the assembly pipeline are not installed, you can install them by following the instructions in the [install nextflow](#install-nextflow) or [install pipeline](#install-pipeline) bonus sections.
+Nextflow should be preconfigured for you, but if you want to try this on another platform you will need too install `nextflow` and assembly pipeline. You can install them by following the instructions in the [install nextflow](#install-nextflow) or [install pipeline](#install-pipeline) bonus sections.
 
 ## Implementation
 
@@ -90,36 +95,36 @@ First we need to create a directory to store the assemblies. We will call this d
 
 ```bash
 # Create the results directory
-mkdir /results
+mkdir ~/results
 ```
 
 Next, let's create a directory to store the implementation scripts and the working directory. We will call this directory `scripts`. You can create this directory with the following command:
 
 ```bash
 # Create the scripts directory
-mkdir /scripts
+mkdir ~/scripts
 ```
 
 Now we create a script to run the assembly pipeline. You can create a file called `assembly.sh` in the `scripts` directory using a text editor such as `nano` or `vim`. You can copy and paste the following code into the file and save it:
 
 ```bash <@Nabil we need to modify this to specificy adapter_file, confindr database, and qc conditions yaml file>
 #!/bin/bash
-NEXTFLOW_WORKFLOWS_DIR='/path/tp/pipeline'
+NEXTFLOW_WORKFLOWS_DIR='/opt/ghru-assembly'
 INPUT_DIR='/data'
-OUTPUT_DIR='/results'
+OUTPUT_DIR='~/results'
 
-nextflow run ${NEXTFLOW_WORKFLOWS_DIR}/assembly.nf 
-    --adapter_file adapters.fas 
-    --qc_conditions qc_conditions_nextera_relaxed_dev.yml
-    --input_dir ${INPUT_DIR}
-    --fastq_pattern '*{R,_}{1,2}.f*q.gz'
-    --output_dir ${OUTPUT_DIR}
-    --depth_cutoff 100
-    --prescreen_file_size_check 12
-    --confindr_db_path /path/to/confindr_database
-    --careful
-    --kmer_min_copy 3
-    -w ${OUTPUT_DIR}/work
+nextflow run ${NEXTFLOW_WORKFLOWS_DIR}/main.nf 
+    --adapter_file adapters.fas \
+    --qc_conditions qc_conditions_nextera_relaxed_dev.yml \
+    --input_dir ${INPUT_DIR} \
+    --fastq_pattern '*{R,_}{1,2}.f*q.gz' \
+    --output_dir ${OUTPUT_DIR} \
+    --depth_cutoff 100 \
+    --prescreen_file_size_check 12 \
+    --confindr_db_path /path/to/confindr_database \
+    --careful \
+    --kmer_min_copy 3 \
+    -w ${OUTPUT_DIR}/work \
     -resume
 ```
 
@@ -127,7 +132,7 @@ Finally, you can run the assembly pipeline by executing the script:
 
 ```bash
 # Run the assembly pipeline
-bash /scripts/assembly.sh
+bash ~/scripts/assembly.sh
 ```
 
 ## Results
@@ -136,31 +141,33 @@ The assembly pipeline will create six directories in the `assemblies` directory.
 
 ```bash
 # Check the contents of the /results directory
-ls /results
+ls ~/results
 ```
 
 You will find the fasta-formatted assemblies in the `assemblies` directory. There, you will find `pass`, `warning`, and `failure` directories containing the assemblies according to their quality. You can check the contents of the `assemblies` directory:
 
 ```bash
 # Check the contents of the /results/assemblies directory 
-ls /results/assemblies
+ls ~/results/assemblies
 ```
 
 Additonally you will find the `quality_reports` directory containing the quality control reports for the assemblies. You can check the contents of the `quality_reports` directory:
 
 ```bash
 # Check the contents of the /results/quality_reports directory
-ls /results/quality_reports
+ls ~/results/quality_reports
 ```
 
 You may want to import the quality report (`results/quality_reports/qualifyr_report.tsv`) to your local machine so as to explore whether the assemblies are of high quality or not. You can use the `scp` command to do this:
 
-```bash <@Nabil please provide a proper username:address combination>
+```bash
 # Copy the quality report to your local machine
-scp user@ghru-assembly:/results/quality_reports/qualifyr_report.tsv /path/to/local/machine
+scp user2@159.65.95.44:results/quality_reports/qualifyr_report.tsv /path/to/local/machine
+# OR 
+scp user1@159.65.95.44:results/quality_reports/qualifyr_report.tsv /path/to/local/machine
 ```
 
-You can use the same command to copy the assemblies to your local machine (hint: `scp -r` helps you move an entire directory). 
+You will be prompted for your password. You can use the same command to copy the assemblies to your local machine (hint: `scp -r` helps you move an entire directory). 
 
 # Bonus Materials
 
@@ -168,7 +175,7 @@ You can use the same command to copy the assemblies to your local machine (hint:
 
 You can use tools such as `wget` or `curl` to fetch data from a remote location such as Figshare, ENA or SRA. For example, you can fetch the data from the following Figshare link:
 
-```bash <@Nabil please check this link>
+```bash
 # Fetch the data from Figshare
 wget https://figshare.com/ndownloader/articles/25266367/versions/1 -O /data/fastqs.zip
 # Unzip the data

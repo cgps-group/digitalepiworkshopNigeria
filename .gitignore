@@ -3,6 +3,8 @@
 .RData
 .Ruserdata
 
+_*/ 
+
 /.quarto/
 .venv
 .vscode/
