@@ -3,4 +3,10 @@
 .RData
 .Ruserdata
 
+_*/ 
+
 /.quarto/
+.venv
+.vscode/
+_site/
+_freeze/
