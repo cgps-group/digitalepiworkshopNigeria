@@ -182,7 +182,16 @@ unzip /data/fastqs.zip -d /data
 
 ## Install nextflow {#install-nextflow}
 
-This may be a bit of work, but you can install nextflow by following the instructions in the following link: https://www.nextflow.io/docs/latest/getstarted.html
+To install Nextflow, a tool for orchestrating scientific workflows, follow these steps:
+
+Nextflow requires Java to be installed on your system. Make sure you have Java Development Kit (JDK) version 8 or later installed. You can check if Java is installed by running `java -version` in your terminal or command prompt.
+
+Then enter this command in your terminal:
+```
+curl -s https://get.nextflow.io | bash
+```
+
+It creates a file nextflow in the current dir. Visit the [nextflow website for more details](https://www.nextflow.io/). 
 
 ## Install assembly pipeline {#install-pipeline}
 
