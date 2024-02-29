@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -186,11 +220,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p><em>Note: This exercise is a work of fiction. Any resemblance to a real life situation is purely coincidental.</em></p>
-<p>In December 2020, three cases of primary bloodstream infections sustained by ertapenem-resistant <em>Klebsiella pneumoniae</em> were observed over a two-month period in the neonatal intensive care unit (NICU) at the University College Hospital in Ibadan, Oyo State. The NICU consists of a 15-bed tertiary level ward. Faecal screening of all admitted neonates was performed. Ten additional samples from the environment were collected. A plan of the NICU and sample collection can be seen below.</p>
-<p><img src="img/unit.png" width="70%" height="70%"></p>
-<p>The reference lab has sent you the culture results in an Excel file called (<a href="data/lab_results.xlsx"><code>lab_results.xlsx</code></a>). Faecal screening of all admitted neonates, revealed that <strong>five other neonates</strong> were carriers of <em>K. pneumoniae</em>. The lab reported that <strong>2 out of 10</strong> environmental samples were positive for <em>K. pneumoniae</em>. <strong>This immediately prompted the closure of 1 room.</strong></p>
-<p>One colony from each confirmed case and two from the environment were sent to the GHRU-Ibadan unit for sequencing. The epidemiological and demographic data is summarised in the file <a href="data/epi_data.csv">epi_data.csv</a>.</p>
-<p>It is up to the user to now investigate the possibility of an outbreak of <em>K. pneumoniae</em> in the neonatal unit using the GHRU assembly pipeline, Pathogenwatch, data-flo and Microreact, free web applications developed by the Centre for Genomic Pathogen Surveillance for data analyses, integration and visualisation.</p>
+<p>In December 2020, three cases of primary bloodstream infections sustained by ertapenem-resistant <em>Klebsiella pneumoniae</em> were observed over a two-week period in the neonatal intensive care unit (NICU) at the University College Hospital in Ibadan, Oyo State. This NICU consists of a 15-bed tertiary level ward. Since the detection of these infections, faecal screening of all admitted neonates was performed. Additionally, ten samples from the environment were collected. The epidemiological and demographic data is summarised in the file <a href="data/epi_data.csv">epi_data.csv</a>.</p>
+<p><img src="img/unit.png" width="70%" height="70%"><br> Plan of the NICU. Locations of sample collection is indicated with light blue circles. <br><br></p>
+<p>The reference lab sent you the culture results from the faecal, bloodstream, and environmental sampling in an Excel file called (<a href="data/lab_results.xlsx"><code>lab_results.xlsx</code></a>). Faecal screening of the admitted neonates, revealed that <strong>five other neonates</strong> were carriers of <em>K. pneumoniae</em>. Also, the lab reported that <strong>2 out of 10</strong> environmental samples were positive for <em>K. pneumoniae</em>. <strong>This immediately prompted the closure of 1 room.</strong></p>
+<p>One colony from each confirmed case and from each of the two positive environmental samples were sent to the GHRU-Ibadan unit for sequencing.</p>
+<p>It is now up to you to investigate the possibility of an outbreak of <em>K. pneumoniae</em> in the neonatal unit using the raw sequencing data, the GHRU assembly pipeline, Pathogenwatch, data-flo and Microreact, free web applications developed by the Centre for Genomic Pathogen Surveillance for data analyses, integration and visualisation.</p>
 </section>
 <section id="learning-outcomes" class="level1">
 <h1>Objectives</h1>
@@ -204,14 +238,90 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="obtain-high-quality-assemblies" class="level1">
 <h1>Trim, assemble and QC with GHRU Nextflow pipeline</h1>
-<p><code>https://gitlab.com/cgps/ghru/pipelines/assembly</code></p>
-<p>At this point, the user is given 22 fastq files. The GHRU assembly pipeline uses a workflow implemented in Nextflow to process Illumina short-read fastq files and convert them to assemblies using the <a href="https://github.com/ablab/spades">SPAdes assembler</a>. Additionally, the workflow includes a quality control before and after trimming with <a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a>. The final assemblies are also quality controled using <a href="https://quast.sourceforge.net/quast">QUAST</a>.</p>
-<p>First download Nextflow: <code>curl -s https://get.nextflow.io | bash</code></p>
-<p>To download the GHRU Assembly pipeline download the code: <code>curl https://gitlab.com/cgps/ghru/pipelines/assembly.git</code></p>
-<p>To run the pipeline: <code>./nextflow run assembly.nf \ --adapter_file adapters.fas \ --qc_conditions qc_conditions_nextera_relaxed_dev.yml \ --input_dir input_data \ --fastq_pattern '*{R,_}{1,2}.f*q.gz' \ --output_dir assemblies \ --depth_cutoff 100 \ --prescreen_file_size_check 12 \ --confindr_db_path /path_to/confindr_database \ --careful \ --kmer_min_copy 3 \ --skip_quast_summary \ --skip_quast_multiqc \ --skip_fastqc_multiqc \ -w work \ -qs 1000 -resume</code></p>
+<p><code>https://gitlab.com/cgps/ghru/pipelines/assembly</code> &lt;<span class="citation" data-cites="Nabil">@Nabil</span>, could you check if this is available to non CGPS people&gt;</p>
+<section id="hardware" class="level2">
+<h2 class="anchored" data-anchor-id="hardware">Hardware</h2>
+<p>For this exercise you will use our bioinformatics servers. Connecting to our bioinformatics servers ensure the computational resources required for the assembly process are available.</p>
+<p>To connect to our bioinformatics servers, follow the instructions below. Replace <code>user</code> with your username and <code>ghru-assembly</code> with the name of the server you want to connect to. You will need to enter your password when prompted.:</p>
+<p><code>bash &lt;@Nabil modofy accordingly&gt; # Connect to the server ssh  user@ghru-assembly</code></p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>You will find 11 sets of paired-end Illumina reads in the <code>/data/</code>&lt;<span class="citation" data-cites="Nabil">@Nabil</span> please check the raw data is here&gt; directory. Thus, this directory will contain 22 fastq files (two per genome). You can check the data is actually there:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /data/ directory</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The /data directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA following the instructions in the <a href="#fetching-data">fetching data</a> bonus section.</p>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<p>The assembly process pipeline will process each pair of Illumina short-read fastq files and assemble them using the <a href="https://github.com/ablab/spades">SPAdes assembler</a>. Along the assembly process, the workflow will perform quality control checks and filters. Some of the most important steps are:</p>
+<ol type="1">
+<li>Trimming of Illumina adapters and low quality bases using <a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a></li>
+<li>Quality control of the reads using <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a></li>
+<li>Assembly of the reads using SPAdes</li>
+<li>Quality control of the assemblies using <a href="http://quast.sourceforge.net/">QUAST</a></li>
+</ol>
+<p>Nextflow is already installed in our bioinformatics servers, and the assembly pipeline can be found in <code>/path/to/pipeline</code> &lt;<span class="citation" data-cites="Nabil">@Nabil</span> please change this to fit the image structure&gt;. Let’s check that nextflow is installed and that we can find the assembly pipeline:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that nextflow is installed</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> <span class="at">-v</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the assembly pipeline can be found at /path/to/pipeline directory &lt;@Nabil please change this as well&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /path/to/pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If <code>nextflow</code> or the assembly pipeline are not installed, you can install them by following the instructions in the <a href="#install-nextflow">install nextflow</a> or <a href="#install-pipeline">install pipeline</a> bonus sections.</p>
+</section>
+<section id="implementation" class="level2">
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
+<p>First we need to create a directory to store the assemblies. We will call this directory <code>results</code>. You can create this directory with the following command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the results directory</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next, let’s create a directory to store the implementation scripts and the working directory. We will call this directory <code>scripts</code>. You can create this directory with the following command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scripts directory</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /scripts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now we create a script to run the assembly pipeline. You can create a file called <code>assembly.sh</code> in the <code>scripts</code> directory using a text editor such as <code>nano</code> or <code>vim</code>. You can copy and paste the following code into the file and save it:</p>
+<p>```bash &lt;<span class="citation" data-cites="Nabil">@Nabil</span> we need to modify this to specificy adapter_file, confindr database, and qc conditions yaml file&gt; #!/bin/bash NEXTFLOW_WORKFLOWS_DIR=‘/path/tp/pipeline’ INPUT_DIR=‘/data’ OUTPUT_DIR=‘/results’</p>
+<p>nextflow run ${NEXTFLOW_WORKFLOWS_DIR}/assembly.nf –adapter_file adapters.fas –qc_conditions qc_conditions_nextera_relaxed_dev.yml –input_dir ${INPUT_DIR} –fastq_pattern ’*{R,_}{1,2}.f*q.gz’ –output_dir ${OUTPUT_DIR} –depth_cutoff 100 –prescreen_file_size_check 12 –confindr_db_path /path/to/confindr_database –careful –kmer_min_copy 3 -w ${OUTPUT_DIR}/work -resume</p>
+<pre><code>
+Finally, you can run the assembly pipeline by executing the script:
+
+```bash
+# Run the assembly pipeline
+bash /scripts/assembly.sh</code></pre>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The assembly pipeline will create six directories in the <code>assemblies</code> directory.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /results directory</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will find the fasta-formatted assemblies in the <code>assemblies</code> directory. There, you will find <code>pass</code>, <code>warning</code>, and <code>failure</code> directories containing the assemblies according to their quality. You can check the contents of the <code>assemblies</code> directory:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /results/assemblies directory </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /results/assemblies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Additonally you will find the <code>quality_reports</code> directory containing the quality control reports for the assemblies. You can check the contents of the <code>quality_reports</code> directory:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /results/quality_reports directory</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /results/quality_reports</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You may want to import the quality report (<code>results/quality_reports/qualifyr_report.tsv</code>) to your local machine so as to explore whether the assemblies are of high quality or not. You can use the <code>scp</code> command to do this:</p>
+<p><code>bash &lt;@Nabil please provide a proper username:address combination&gt; # Copy the quality report to your local machine scp user@ghru-assembly:/results/quality_reports/qualifyr_report.tsv /path/to/local/machine</code></p>
+<p>You can use the same command to copy the assemblies to your local machine (hint: <code>scp -r</code> helps you move an entire directory).</p>
+</section>
+</section>
+<section id="bonus-materials" class="level1">
+<h1>Bonus Materials</h1>
+<section id="fetching-data" class="level2">
+<h2 class="anchored" data-anchor-id="fetching-data">Fetching data</h2>
+<p>You can use tools such as <code>wget</code> or <code>curl</code> to fetch data from a remote location such as Figshare, ENA or SRA. For example, you can fetch the data from the following Figshare link:</p>
+<p><code>bash &lt;@Nabil please check this link&gt; # Fetch the data from Figshare wget https://figshare.com/ndownloader/articles/25266367/versions/1 -O /data/fastqs.zip # Unzip the data unzip /data/fastqs.zip -d /data</code></p>
+</section>
+<section id="install-nextflow" class="level2">
+<h2 class="anchored" data-anchor-id="install-nextflow">Install nextflow</h2>
+<p>This may be a bit of work, but you can install nextflow by following the instructions in the following link: https://www.nextflow.io/docs/latest/getstarted.html</p>
+</section>
+<section id="install-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="install-pipeline">Install assembly pipeline</h2>
+<p>To install the assembly pipeline, you can clone the repository from the following link:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clone the assembly pipeline</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://gitlab.com/cgps/ghru/pipelines/assembly.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong><em>The materials provided in this repository are FREE to use.</em></strong> <strong><em>This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.</em></strong></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

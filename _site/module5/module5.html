@@ -207,36 +207,163 @@ ul.task-list li input[type="checkbox"] {
 <p>A cgSNP tree was generated through Pathogenwatch (<a href="https://drive.google.com/file/d/1R8nyAXNaiGIBL-2u30sD-W5Ajy-VNUeR/view?usp=drive_link"><code>tree.nwk</code></a>). Contextual genomes present in Pathogenwatch (Jan 2020-now) were also included in the tree inference and their associated data added to the <a href="https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link"><code>epi_data.csv</code></a> file.</p>
 <p>The user now has the information needed for the investigation in the following formats:</p>
 <ul>
-<li><a href="https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link"><code>epi_data.csv</code></a> Epi data from 3 clinical cases, 7 carriers and 10 environmental samples</li>
+<li><a href="https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link"><code>epi_data.csv</code></a> Epi data from 3 clinical cases, 6 carriers and 11 environmental samples</li>
 <li><a href="https://docs.google.com/spreadsheets/d/1ukjQPDBbp9wYKs3mm0U9FRxqOc67Q_Xe/edit?usp=drive_link&amp;ouid=108741433975672489406&amp;rtpof=true&amp;sd=true"><code>lab_results.xlsx</code></a> Culture and AST results</li>
 <li><a href="https://drive.google.com/file/d/1dpagR9zHyk1WtJhvfsWqskwZhNc8Enax/view?usp=drive_link"><code>mlst-Pasteur.csv</code></a> MLST results from Pathogenwatch</li>
 <li><a href="https://drive.google.com/file/d/1R8nyAXNaiGIBL-2u30sD-W5Ajy-VNUeR/view?usp=drive_link"><code>tree.nwk</code></a> cgSNP tree of 7 Kpn genomes</li>
 </ul>
 <p>The files are located in <a href="https://drive.google.com/drive/folders/1raGT9V6QrobVJMdBWgwVAQ8zpuIHfjGa?usp=drive_link"><strong>this link</strong></a>.</p>
-<p>We will combine data from these different sources with a data-flo workflow that takes the files above as input, and creates as an output a Microreact project where the data can be visualised.</p>
-<p>Open the data-flo workflow (<a href="https://data-flo.io/run?wbhznSXSn3qAomUnGrXesx"><strong>https://data-flo.io/run?wbhznSXSn3qAomUnGrXesx</strong></a>)</p>
-<p><img src="img/dataflo_2023.png" width="50%" height="50%"></p>
-<p>Copy the workflow to your own dataflo account.</p>
-<p><img src="img/dataflo_copy.png" width="50%" height="50%"></p>
-<p>This will open a copy of this workflow in your dataflo account.</p>
-<p><img src="img/dataflo_workflow.png" width="50%" height="50%"></p>
-<p><strong>On a different browser tab</strong>, get your microreact <code>API access token</code> at <a href="https://microreact.org/my-account/settings"><strong>https://microreact.org/my-account/settings</strong></a> (you must already have created your microreact account).</p>
-<p><img src="img/miroreact_token.png" width="50%" height="50%"></p>
-<p>Edit the workflow to include your own microreact <code>API access token</code>.</p>
+<p>We will create a Data-flo workflow to consolidate the files and send them to Microreact for visualization. Follow the steps below:</p>
+<p>1) <u>Start a new workflow</u>: on the Workflows page click the purple on the button right of the screen and select “Create new Workflow”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/new_workflow.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>2) This is your canvas. On the left you have the canvas on which you will build your workflow. On the right panel you have the list of all the adaptors you can use to build your Workflow.&nbsp;</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/canvas.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>It is good practice to start by naming your workflow. To do so click on the “Untitled Workflow” text on the top left.</p>
+<p>3) To import the Epidemiology data, which is in a CSV file, you can use the <strong><code>import from csv file</code></strong> adaptor. You can find it on the left panel by going through the list of adaptors and selecting the appropriate option. Alternatively, you can use the search feature on the top of the adaptor panel to quickly find the adaptor you need.&nbsp;</p>
+<p>Once you have found the adaptor, click on the file input and select “Data-flo input” on the right panel. This option allows the user to add the CSV file when they run the workflow on the Run page.</p>
+<p>A drop down menu will appear, select “create new input”&nbsp;</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/import_csv.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>4) Click on the input data diamond. You can rename the input data name and add a short description to give the user more context as to which file to add. You can also add the CSV to the test run value, this will allow you to test your workflow with a data file as you build it. You can then click the “play” button on the top left of the screen to test run your workflow. It is good practice to do this, each time you add a new adaptor. If the adapter turns red, something has gone wrong with the adaptor setup.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/input_file.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p><strong>Add latitude and longitudes to the Epidemiological data:</strong>&nbsp;</p>
+<p>5) Because the hospital name is not specific, we can use the concatenate column, to merge the City and Hospital columns. Firstly, select <code>concatenate column</code> from the list of adaptors. Then, connect the data output from the “import from csv file” to the data input in the “concatenate column” adaptor. Click on the “columns” option and select “Define value”. Add the names of the two columns you want to merge. In the separator input option on the adaptor, you can also add a separator (for example, a comma) to separate the values from the two concatenated columns. Finally, in the concatenated column input option, add the name of the new column which will contain the concatenated values.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/concatenate_columns.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>6) Add the <strong><code>geocoding</code></strong> adaptor to your workflow. Under the location column input option, enter your concatenated column. This adaptor will create columns named latitude and longitude by default. However, you can choose to name these columns differently by using the latitude column and longitude column input options.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/geocoding.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>7) Import the lab data into your Workflow. You can do this using the <strong><code>import from excel file</code></strong> adaptor. Follow the same instruction for setting up this adaptor as 3) and 4)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/import_from_csv_file.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>8) The laboratory data includes samples that are both culture positive and negative. However, for our current workflow, we are only interested in the culture positive samples. To filter out the culture negative samples, we can use the <code>filter rows</code> adaptor. First, we need to specify the name of the column we want to search, which in this case is the culture column. Next, we need to specify the value to be filtered on, for example, Klebsiella pneumoniae. After filtering, we will get two output datatables. One will contain all the rows that include Klebsiella pneumoniae, while the other will contain all the remaining rows.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/filter rows.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>9)To combine the lab data and epidemiology data tables, you can use the <strong><code>join datatables</code></strong> adaptor. First, add the two datatables to the main and other data inputs. Then, specify which columns from each datatable should be used to perform the join. You can choose the type of join you want to perform - in this case, we want an inner join which will only keep the rows that have matching values in both tables. For more information on different types of joins, you can visit the following URL: https://www.datasciencemadesimple.com/join-in-r-merge-in-r/.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/join_datatables.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>10) Import the Pathogen Watch metadata using steps 3) and 4)</p>
+<p>11) The metadata file contains several columns that are either blank or not useful. To select only the necessary columns, you can use the <code>select columns</code> adaptor. In the “column names” input, you need to define a list of columns that you want to keep in the file. In this case, you will want to keep the following columns: Name, Country, Collection date, Collected by, Isolation source, Host, Latitude, and Longitude. Note: you can also use the <code>remove columns</code> adaptor, in which case you would need to define the columns you wish to remove.&nbsp;</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/select_columns.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>12) Rename the metadata and joined lab and epi datatables in order to make them match. To do so, you can use the <code>rename columns</code> adaptor.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/rename_columns.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Renaming the Metadata datatable: under the column names input, rename all the columns according to the table below.&nbsp;</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/metadata_rename.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Renaming the joined lab/epi datatable: rename the columns according to the table below. In addition, under the discard unmapped, click the define value and select TRUE, this will discard any columns that were not renamed.&nbsp;</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/lab_epi_rename.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>13) Back to the PW metadata, you may have observed that the rows associated with the samples from University College Hospital are empty. These rows can be removed as the information for them is present in the joined lab/epi datatable. To do this, you can use the <code>filter rows</code> adaptor. Select the “collection_date” under the column name input and click on “define” under the filter type input. Then choose the “is-blank” option.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/filter_rows_adaptor.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>14) Add a country column to the joined lab/epi datatable using the <code>add column</code> adaptor. Under the value input add Nigeria.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/add_column_adaptor.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>15) Add a “host” column to the joined lab/epi datatable using the <strong><code>map column values</code></strong> adaptor. Map the values in the “source” column to either “Human” or “Environmental”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/map_column_values_adaptor.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>16) Append both datatables together using the “append datatables” adaptor</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/append_datatable_adaptor.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>17) Import the Kleborate CSV using steps 3) and 4)</p>
+<p>18) Join the Kleborate datatable to the other datatable using the <code>join datatable</code> adaptor.</p>
+<p>19) We now want to export this data to Microreact to visualize it. Before we do this. We need to convert this datatable to CSV form which can be done using the <code>export to CSV file</code> adaptor.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/export_to_csv_file_adaptor.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>20) Select the <code>export to microreact</code> adaptor.</p>
 <ol type="1">
-<li>Click on <code>*access token</code> in the <code>Create microreact project</code> box</li>
-<li>From the options on the right, select <code>Bind to value</code></li>
-<li>Paste your <code>API access token</code> in the <code>VALUE</code> box</li>
+<li><p>Link your CSV output of the previous adaptor to the data file input of this adaptor</p></li>
+<li><p>Under the tree file input, add a new data-flo output for your tree file.</p></li>
 </ol>
-<p><img src="img/dataflo_key.png" width="50%" height="50%"></p>
-<p>Save your newly edited dataflo project by clicking on the <code>save</code> icon.</p>
-<p><img src="img/dataflo_save.png" width="50%" height="50%"></p>
-<p>Now lets go to the implementation page by clicking on the <code>i</code> icon.</p>
-<p><img src="img/dataflo_implementation.png" width="50%" height="50%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/export_to_microreact_adaptor.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p><strong>On a different browser tab</strong>, get your microreact <code>API access token</code> at <a href="https://microreact.org/my-account/settings"><strong>https://microreact.org/my-account/settings</strong></a> (you must already have created your microreact account).</p>
+<p>Go to the My account tab at the top of your Microreact page and then to the Account Settings. Copy your API token.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/miroreact_token.png" class="img-fluid figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>Go back to your Data-flo workflow and click on <code>*access token</code> and add your API token as a defined value.</p>
+<p>In the outputs of the <code>export to microreact</code> click on URL and check the “Use as Workflow Output”</p>
+<section id="run-your-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="run-your-workflow">Run your workflow</h3>
+<p>On the top right corner of your canvas, select the Run option.</p>
 <p>To run the workflow upload the files named lab_results.xlsx, tree.nwk, epi_data.csv, and mlst-Pasteur.csv.</p>
-<p><img src="img/dataflo_run2.png" width="50%" height="50%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/New/run_page.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 <p>Click on <strong><code>Run</code></strong>. The Outputs box now shows the url of a Microreact project created by data-flo.</p>
-<p><img src="img/dataflo_result.png" width="50%" height="50%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/dataflo_result.png" class="img-fluid figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</section>
 </section>
 <section id="sign-in-to-data-flo" class="level1">
 <h1>Sign-in to data-flo</h1>
