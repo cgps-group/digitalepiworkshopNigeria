@@ -42,12 +42,13 @@ A cgSNP tree was generated through Pathogenwatch ([`tree.nwk`](https://drive.goo
 
 The user now has the information needed for the investigation in the following formats:
 
--   [`epi_data.csv`](https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link) Epi data from 3 clinical cases, 6 carriers and 11 environmental samples
--   [`lab_results.xlsx`](https://docs.google.com/spreadsheets/d/1ukjQPDBbp9wYKs3mm0U9FRxqOc67Q_Xe/edit?usp=drive_link&ouid=108741433975672489406&rtpof=true&sd=true) Culture and AST results
--   [`mlst-Pasteur.csv`](https://drive.google.com/file/d/1dpagR9zHyk1WtJhvfsWqskwZhNc8Enax/view?usp=drive_link) MLST results from Pathogenwatch
--   [`tree.nwk`](https://drive.google.com/file/d/1R8nyAXNaiGIBL-2u30sD-W5Ajy-VNUeR/view?usp=drive_link) cgSNP tree of 7 Kpn genomes
+-   [`epi_data.csv`](https://drive.google.com/file/d/13HD8-XOAGDftpxGlyk4GD1f_uIvPZ54R/view?usp=sharing) Epi data from 3 clinical cases, 6 carriers and 11 environmental samples
+-   [`lab_results.xlsx`](https://docs.google.com/spreadsheets/d/153bF5JcYkRcxxMEitsu0P7kTyvhE_VLw/edit?usp=drive_link&ouid=112034429986883609176&rtpof=true&sd=true) Culture and AST results
+-   [`PW_metadata.csv`](https://drive.google.com/file/d/1hsJFZjzaWFUWeRhkU8H7rfnabcyxDCRR/view?usp=drive_link) metadata results from Pathogenwatch
+-   [PW_Kleborate.csv](https://drive.google.com/file/d/1qC32dWw3ClUdFpK0LsTn3-nBazXxtpul/view?usp=drive_link) Kleborate file from Pathogenwatch
+-   [`tree.nwk`](https://drive.google.com/file/d/1d4KnpHY6rVKV6spwy9bBMeV3wnHwuJoj/view?usp=drive_link) cgSNP tree of 7 Kpn genomes
 
-The files are located in [**this link**](https://drive.google.com/drive/folders/1raGT9V6QrobVJMdBWgwVAQ8zpuIHfjGa?usp=drive_link).
+The files are located in [**this link**](https://drive.google.com/drive/folders/18L-t-xTWaURNITyiefqFsKBr26T0AHEK).
 
 We will create a Data-flo workflow to consolidate the files and send them to Microreact for visualisation. Follow the steps below:
 
@@ -113,7 +114,7 @@ Renaming the joined lab/epi datatable: rename the columns according to the table
 
 ![](img/New/lab_epi_rename.png){fig-align="center"}
 
-13\) Back to the PW metadata, you may have observed that the rows associated with the samples from University College Hospital are empty. These rows can be removed as the information for them is present in the joined lab/epi datatable. To do this, you can use the `filter rows` adaptor. Select the "collection_date" under the column name input and click on "define" under the filter type input. Then choose the "is-blank" option.
+13\) Back to the PW metadata, you may have observed that the rows associated with the samples from University College Hospital are empty. These rows can be removed as the information for them is present in the joined lab/epi datatable. To do this, you can use the `filter rows` adaptor. Select the "collection_date" under the column name input and click on "define" under the filter type input. Then choose the "is-blank" option. Note: the data you want will be in the complementary output and not the data output
 
 ![](img/New/filter_rows_adaptor.png){fig-align="center"}
 
