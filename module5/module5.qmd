@@ -15,28 +15,28 @@ title: "SESSION 5 - Data integration with Data-flo"
 
 # Introduction {#intro}
 
-Data-flo ([https://data-flo.io/](/introduction/readme#what-is-data-flo)) is a system for customised integration and manipulation of diverse data via a simple drag and drop interface.\*\*
+Data-flo (<https://next.data-flo.io/>) is a system for customised integration and manipulation of diverse data via a simple drag and drop interface.\*\*
 
 For Data-flo documentation, go to <https://docs.data-flo.io/introduction/readme>.
 
 Data-flo can easily combine epidemiological data, genomic data, laboratory data, and various metadata from disparate sources (i.e., different data systems) and formats.
 
-Data-flo provides a visual method to design a reusable pipeline to integrate, clean, and manipulate data in a multitude of ways, eliminating the need for continuous manual intervention (e.g., coding, formatting, spreadsheet formulas, manual copy-pasting).
+Data-flo provides a visual method to design a reusable workflows to integrate, clean, and manipulate data in a multitude of ways, eliminating the need for continuous manual intervention (e.g., coding, formatting, spreadsheet formulas, manual copy-pasting).
 
-Data-flo pipelines are combinations of ready-to-use data adaptors that can be tailored, modularised and shared for reuse and reproducibility. Once a Data-flo pipeline has been created, it can be run anytime, by anyone with access, to enable push-button data extraction and transformation. This saves significant time by removing the bulk of the manual repetitive workflows that require multiple sequential or tedious steps, enabling practitioners to focus on analysis and interpretation.
+Data-flo workflows are combinations of ready-to-use data adaptors that can be tailored, modularised and shared for reuse and reproducibility. Once a Data-flo workflow has been created, it can be run anytime, by anyone with access, to enable push-button data extraction and transformation. This saves significant time by removing the bulk of the manual repetitive workflows that require multiple sequential or tedious steps, enabling practitioners to focus on analysis and interpretation.
 
 # Objectives {#learning-outcomes}
 
 At the end of this session the participants will be able to:
 
-1.  Build a data transformation dataflow by combining ready-to-use data adaptors suited to the exercise
-2.  Acquire a microreact link that combines all the data files from the exercise using data-flo
+1.  Build a data transformation workflow by combining ready-to-use data adaptors suited to the exercise
+2.  Acquire a Microreact link that combines all the data files from the exercise using Data-flo
 
 # Data integration with Data-flo {#data-flow}
 
 `https://data-flo.io/`
 
-*Note: you need to sign-up for data-flo and Microreact. See instructions in the [Resources](#resources) section. Creating your own account will allow you to manage and edit your projects.*
+*Note: you need to sign-up for Data-flo and Microreact. See instructions in the [Resources](#resources) section. Creating your own account will allow you to manage and edit your projects.*
 
 A cgSNP tree was generated through Pathogenwatch ([`tree.nwk`](https://drive.google.com/file/d/1R8nyAXNaiGIBL-2u30sD-W5Ajy-VNUeR/view?usp=drive_link)). Contextual genomes present in Pathogenwatch (Jan 2020-now) were also included in the tree inference and their associated data added to the [`epi_data.csv`](https://drive.google.com/file/d/1J9n1bM_527OCWEq6_6XQf7sheE-XL8Ol/view?usp=drive_link) file.
 
@@ -49,7 +49,7 @@ The user now has the information needed for the investigation in the following f
 
 The files are located in [**this link**](https://drive.google.com/drive/folders/1raGT9V6QrobVJMdBWgwVAQ8zpuIHfjGa?usp=drive_link).
 
-We will create a Data-flo workflow to consolidate the files and send them to Microreact for visualization. Follow the steps below:
+We will create a Data-flo workflow to consolidate the files and send them to Microreact for visualisation. Follow the steps below:
 
 1\) [Start a new workflow]{.underline}: on the Workflows page click the purple on the button right of the screen and select “Create new Workflow”
 
@@ -95,7 +95,7 @@ A drop down menu will appear, select “create new input” 
 
 ![](img/New/join_datatables.jpeg){fig-align="center"}
 
-10\) Import the Pathogen Watch metadata using steps 3) and 4)
+10\) Import the Pathogenwatch metadata using steps 3) and 4)
 
 11\) The metadata file contains several columns that are either blank or not useful. To select only the necessary columns, you can use the `select columns` adaptor. In the "column names" input, you need to define a list of columns that you want to keep in the file. In this case, you will want to keep the following columns: Name, Country, Collection date, Collected by, Isolation source, Host, Latitude, and Longitude. Note: you can also use the `remove columns` adaptor, in which case you would need to define the columns you wish to remove. 
 
@@ -133,7 +133,7 @@ Renaming the joined lab/epi datatable: rename the columns according to the table
 
 18\) Join the Kleborate datatable to the other datatable using the `join datatable` adaptor.
 
-19\) We now want to export this data to Microreact to visualize it. Before we do this. We need to convert this datatable to CSV form which can be done using the `export to CSV file` adaptor.
+19\) We now want to export this data to Microreact to visualise it. Before we do this. We need to convert this datatable to CSV form which can be done using the `export to CSV file` adaptor.
 
 ![](img/New/export_to_csv_file_adaptor.png){fig-align="center"}
 
@@ -166,9 +166,5 @@ To run the workflow upload the files named lab_results.xlsx, tree.nwk, epi_data.
 Click on **`Run`**. The Outputs box now shows the url of a Microreact project created by data-flo.
 
 ![](img/dataflo_result.png){fig-align="center" width="50%"}
-
-# Sign-in to data-flo {#sign-in-to-data-flo}
-
-[**https://docs.data-flo.io/introduction/getting-started-sign-in**](https://docs.data-flo.io/introduction/getting-started-sign-in)
 
 ***The materials provided in this repository are FREE to use.*** ***This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.***

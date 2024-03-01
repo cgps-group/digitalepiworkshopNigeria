@@ -238,68 +238,132 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="obtain-high-quality-assemblies" class="level1">
 <h1>Trim, assemble and QC with GHRU Nextflow pipeline</h1>
-<p><code>https://gitlab.com/cgps/ghru/pipelines/assembly</code> &lt;<span class="citation" data-cites="Nabil">@Nabil</span>, could you check if this is available to non CGPS people&gt;</p>
+<p>GHRU Nextflow pipeline can be used to process short read fastq files an assembly pipeline using the SPAdes assembler. Alongside this it will QC the reads before and after trimming and QC the final assembled scaffolds file using Quast. The pipeline was based on Shovill (Thanks to Torsten Seemann <span class="citation" data-cites="torstenseemann">@torstenseemann</span>): https://github.com/tseemann/shovill</p>
+<p>This pipeline automates a number of key steps in the complex process of genome assembly.</p>
 <section id="hardware" class="level2">
 <h2 class="anchored" data-anchor-id="hardware">Hardware</h2>
-<p>For this exercise you will use our bioinformatics servers. Connecting to our bioinformatics servers ensure the computational resources required for the assembly process are available.</p>
-<p>To connect to our bioinformatics servers, follow the instructions below. Replace <code>user</code> with your username and <code>ghru-assembly</code> with the name of the server you want to connect to. You will need to enter your password when prompted.:</p>
-<p><code>bash &lt;@Nabil modofy accordingly&gt; # Connect to the server ssh  user@ghru-assembly</code></p>
+<p>For this exercise you will use our pre configured bioinformatics servers. Connecting to our bioinformatics servers ensure the computational resources required for the assembly process are available. If you wish to run through this module on another platform, you will need to install the required software and download the sample data yourself. The pipeline we will be using is available here <code>https://gitlab.com/cgps/ghru/pipelines/dsl2/pipelines/assembly</code>.</p>
+<p>To connect to our bioinformatics servers, follow the instructions below. Replace <code>user</code> with your username with the name of the server you want to connect to. You will need to enter your password when prompted. Your password will be provided to you by one of the instructors:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to the server</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> user@159.65.95.44</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>You will find 11 sets of paired-end Illumina reads in the <code>/data/</code>&lt;<span class="citation" data-cites="Nabil">@Nabil</span> please check the raw data is here&gt; directory. Thus, this directory will contain 22 fastq files (two per genome). You can check the data is actually there:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /data/ directory</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The /data directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA following the instructions in the <a href="#fetching-data">fetching data</a> bonus section.</p>
+<p>You will find 11 sets of paired-end Illumina reads in the <code>/data/</code>. Thus, this directory will contain 22 fastq files (two per genome). You can check the data is actually there:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /data/ directory</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>/data</code>directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA following the instructions in the <a href="#fetching-data">fetching data</a> bonus section.</p>
 </section>
 <section id="software" class="level2">
 <h2 class="anchored" data-anchor-id="software">Software</h2>
-<p>The assembly process pipeline will process each pair of Illumina short-read fastq files and assemble them using the <a href="https://github.com/ablab/spades">SPAdes assembler</a>. Along the assembly process, the workflow will perform quality control checks and filters. Some of the most important steps are:</p>
-<ol type="1">
-<li>Trimming of Illumina adapters and low quality bases using <a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a></li>
-<li>Quality control of the reads using <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a></li>
-<li>Assembly of the reads using SPAdes</li>
-<li>Quality control of the assemblies using <a href="http://quast.sourceforge.net/">QUAST</a></li>
-</ol>
-<p>Nextflow is already installed in our bioinformatics servers, and the assembly pipeline can be found in <code>/path/to/pipeline</code> &lt;<span class="citation" data-cites="Nabil">@Nabil</span> please change this to fit the image structure&gt;. Let’s check that nextflow is installed and that we can find the assembly pipeline:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that nextflow is installed</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> <span class="at">-v</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the assembly pipeline can be found at /path/to/pipeline directory &lt;@Nabil please change this as well&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /path/to/pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If <code>nextflow</code> or the assembly pipeline are not installed, you can install them by following the instructions in the <a href="#install-nextflow">install nextflow</a> or <a href="#install-pipeline">install pipeline</a> bonus sections.</p>
+<p>The assembly process pipeline will process each pair of Illumina short-read fastq files and assemble them using the <a href="https://github.com/ablab/spades">SPAdes assembler</a>. Along the assembly process, the workflow will perform quality control checks and filters. The workflow consists of the following steps:</p>
+<ul>
+<li>QC reads using FastQC before trimming</li>
+<li>Trim reads using <a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a> and Cutadapt (if <code>--cutadapt</code> specified)</li>
+<li>QC reads using <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> after trimming</li>
+<li>Correct reads using lighter</li>
+<li>Check for contamination using confindr</li>
+<li>Count number of reads and estimate genome size using Mash</li>
+<li>Downsample reads if the <code>--depth_cutoff</code> argument was specified</li>
+<li>Merge reads using Flash where the insert size is small</li>
+<li>Assemble reads using SPAdes (by default the <code>--careful</code> option is turned off)</li>
+<li>Assess species identification using bactinspector</li>
+<li>Assess assembly quality using <a href="http://quast.sourceforge.net/">QUAST</a></li>
+<li>Summarise all assembly QCs using <a href="http://quast.sourceforge.net/">QUAST</a></li>
+<li>(Optional if QuailFyr qc conditions YAML file is supplied). Filter assemblies into three directories: pass, warning and failure based on QC metrics</li>
+</ul>
+<p><img src="img/assembly_pipeline_processes.png" width="70%" height="70%"><br> A sumamry of this process is shown above <br><br></p>
+<p>Nextflow is already installed in our bioinformatics servers, and the assembly pipeline can be found in <code>/opt/ghru-assembly</code>. Let’s check that nextflow is installed and that we can find the assembly pipeline:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that nextflow is installed</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> <span class="at">-v</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the assembly pipeline can be found at /path/to/pipeline directory &lt;@Nabil please change this as well&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /opt/ghru-assembly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Nextflow should be preconfigured for you, but if you want to try this on another platform you will need too install <code>nextflow</code> and assembly pipeline. You can install them by following the instructions in the <a href="#install-nextflow">install nextflow</a> or <a href="#install-pipeline">install pipeline</a> bonus sections.</p>
 </section>
 <section id="implementation" class="level2">
 <h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
-<p>First we need to create a directory to store the assemblies. We will call this directory <code>results</code>. You can create this directory with the following command:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the results directory</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Next, let’s create a directory to store the implementation scripts and the working directory. We will call this directory <code>scripts</code>. You can create this directory with the following command:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scripts directory</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /scripts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>First we need to create a directory to store the assemblies. We will call this directory <code>results</code>. You can create this directory with the following command, replace <code>user</code> with your username:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the results directory</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /workshop/user/results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next, let’s create a directory to store the implementation scripts and the working directory. We will call this directory <code>scripts</code>. You can create this directory with the following command, replace <code>user</code> with your username:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scripts directory</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /workshop/user/scripts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now we create a script to run the assembly pipeline. You can create a file called <code>assembly.sh</code> in the <code>scripts</code> directory using a text editor such as <code>nano</code> or <code>vim</code>. You can copy and paste the following code into the file and save it:</p>
-<p>```bash &lt;<span class="citation" data-cites="Nabil">@Nabil</span> we need to modify this to specificy adapter_file, confindr database, and qc conditions yaml file&gt; #!/bin/bash NEXTFLOW_WORKFLOWS_DIR=‘/path/tp/pipeline’ INPUT_DIR=‘/data’ OUTPUT_DIR=‘/results’</p>
-<p>nextflow run ${NEXTFLOW_WORKFLOWS_DIR}/assembly.nf –adapter_file adapters.fas –qc_conditions qc_conditions_nextera_relaxed_dev.yml –input_dir ${INPUT_DIR} –fastq_pattern ’*{R,_}{1,2}.f*q.gz’ –output_dir ${OUTPUT_DIR} –depth_cutoff 100 –prescreen_file_size_check 12 –confindr_db_path /path/to/confindr_database –careful –kmer_min_copy 3 -w ${OUTPUT_DIR}/work -resume</p>
-<pre><code>
-Finally, you can run the assembly pipeline by executing the script:
-
-```bash
-# Run the assembly pipeline
-bash /scripts/assembly.sh</code></pre>
+<p>Please change the output directory in line with your username.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">NEXTFLOW_WORKFLOWS_DIR</span><span class="op">=</span><span class="st">'/opt/ghru-assembly'</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">'/data'</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">'/workshop/user/results'</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="va">${NEXTFLOW_WORKFLOWS_DIR}</span>/main.nf </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--adapter_file</span> adapters.fas <span class="dt">\</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--qc_conditions</span> qc_conditions_nextera_relaxed_dev.yml <span class="dt">\</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--input_dir</span> <span class="va">${INPUT_DIR}</span> <span class="dt">\</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">--fastq_pattern</span> <span class="st">'*{R,_}{1,2}.f*q.gz'</span> <span class="dt">\</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> <span class="va">${OUTPUT_DIR}</span> <span class="dt">\</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">--depth_cutoff</span> 100 <span class="dt">\</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">--prescreen_file_size_check</span> 12 <span class="dt">\</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">--confindr_db_path</span> /opt/confindr_db_2019_11_16 <span class="dt">\</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">--careful</span> <span class="dt">\</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">--kmer_min_copy</span> 3 <span class="dt">\</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">-w</span> <span class="va">${OUTPUT_DIR}</span>/work <span class="dt">\</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">-resume</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Finally, you can run the assembly pipeline by executing the script, replace <code>user</code> with your username:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the assembly pipeline</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> /workshop/user/scripts/assembly.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>The assembly pipeline will create six directories in the <code>assemblies</code> directory.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /results directory</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You will find the fasta-formatted assemblies in the <code>assemblies</code> directory. There, you will find <code>pass</code>, <code>warning</code>, and <code>failure</code> directories containing the assemblies according to their quality. You can check the contents of the <code>assemblies</code> directory:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /results/assemblies directory </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /results/assemblies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Additonally you will find the <code>quality_reports</code> directory containing the quality control reports for the assemblies. You can check the contents of the <code>quality_reports</code> directory:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /results/quality_reports directory</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /results/quality_reports</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You may want to import the quality report (<code>results/quality_reports/qualifyr_report.tsv</code>) to your local machine so as to explore whether the assemblies are of high quality or not. You can use the <code>scp</code> command to do this:</p>
-<p><code>bash &lt;@Nabil please provide a proper username:address combination&gt; # Copy the quality report to your local machine scp user@ghru-assembly:/results/quality_reports/qualifyr_report.tsv /path/to/local/machine</code></p>
-<p>You can use the same command to copy the assemblies to your local machine (hint: <code>scp -r</code> helps you move an entire directory).</p>
+<p>The assembly pipeline will create six directories in the <code>assemblies</code> directory, replace <code>user</code> with your username.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /results directory</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /workshop/user/results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will find the fasta-formatted assemblies in the <code>assemblies</code> directory. There, you will find <code>pass</code>, <code>warning</code>, and <code>failure</code> directories containing the assemblies according to their quality. You can check the contents of the <code>assemblies</code> directory, replace <code>user</code> with your username:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /results/assemblies directory </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /workshop/user/results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Additonally you will find the <code>quality_reports</code> directory containing the quality control reports for the assemblies. You can check the contents of the <code>quality_reports</code> directory, replace <code>user</code> with your username:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the contents of the /results/quality_reports directory</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /workshop/user/results/quality_reports</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You may want to import the quality report (<code>results/quality_reports/qualifyr_report.tsv</code>) to your local machine so as to explore whether the assemblies are of high quality or not. You can use the <code>scp</code> command to do this, replace <code>user</code> with your username:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the quality report to your local machine</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> user@159.65.95.44:/workshop/user/results/quality_reports/qualifyr_report.tsv /path/to/local/machine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will be prompted for your password. You can use the same command to copy the assemblies to your local machine (hint: <code>scp -r</code> helps you move an entire directory).</p>
+</section>
+<section id="other-workflow-outputs" class="level2">
+<h2 class="anchored" data-anchor-id="other-workflow-outputs">Other workflow outputs</h2>
+<p>There is a great deal of other outputs produced by the pipeline. These will be found in the directory specified by the <code>--output_dir</code> argument. In this case, <code>/workshop/user/results/</code></p>
+<ul>
+<li>A directory called fastqc/post_trimming that contans the Fastqc reports for each fastq in html format after trimming</li>
+<li>A directory called assemblies containing the final assembled scaffold files named as <sample name="">_scaffolds.fasta. If the qc_conditions argument was given there will be subdirectories named pass, warning and failure where the appropiately QCed scaffolds and failure reasons will be stored.</sample></li>
+<li>A directory called quast containing:
+<ul>
+<li>A summary quast report named combined_quast_report.tsv</li>
+<li>A transposed summary quast report with the samples as rows so that they can be sorted based on the quast metric in columns named combined_quast_report.tsv</li>
+</ul></li>
+<li>A directory called quality_reports containing html reports
+<ul>
+<li>MultiQC summary reports combining QC results for all samples from
+<ul>
+<li>FastQC: fastqc_multiqc_report.html</li>
+<li>Quast: quast_multiqc_report.html</li>
+</ul></li>
+<li>QualiFyr reports. If a qc_conditions.yml file was supplied reports will be generated that contain a summary of the overall pass/fail status of each sample.
+<ul>
+<li>qualifyr_report.html : e.g QualiFyr Report</li>
+<li>qualifyr_report.tsv</li>
+</ul></li>
+</ul></li>
+<li>if the –full_output parameter is given then the following will also be available in the output directory
+<ul>
+<li>A directory called fastqc/pre_trimming that contans the Fastqc reports for each fastq in html format prior to trimming</li>
+<li>A directory called corrected_fastqs that contains the fastq files that have been trimmed with Trimmomatic and corrected using Lighter</li>
+<li>If using paired end reads, a directory called merged_fastqs that contains the fastq files that have been merged using Flash. There will be a files called
+<ul>
+<li><sample name="">.extendedFrags.fastq.gz merged reads</sample></li>
+<li><sample name="">.notCombined_1.fastq.gz unmerged read 1 reads</sample></li>
+<li><sample name="">.notCombined_2.fastq.gz unmerged read 2 reads</sample></li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 </section>
 <section id="bonus-materials" class="level1">
@@ -307,18 +371,47 @@ bash /scripts/assembly.sh</code></pre>
 <section id="fetching-data" class="level2">
 <h2 class="anchored" data-anchor-id="fetching-data">Fetching data</h2>
 <p>You can use tools such as <code>wget</code> or <code>curl</code> to fetch data from a remote location such as Figshare, ENA or SRA. For example, you can fetch the data from the following Figshare link:</p>
-<p><code>bash &lt;@Nabil please check this link&gt; # Fetch the data from Figshare wget https://figshare.com/ndownloader/articles/25266367/versions/1 -O /data/fastqs.zip # Unzip the data unzip /data/fastqs.zip -d /data</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the data from Figshare</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://figshare.com/ndownloader/articles/25266367/versions/1 <span class="at">-O</span> /data/fastqs.zip</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzip the data</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> /data/fastqs.zip <span class="at">-d</span> /data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="install-nextflow" class="level2">
 <h2 class="anchored" data-anchor-id="install-nextflow">Install nextflow</h2>
-<p>This may be a bit of work, but you can install nextflow by following the instructions in the following link: https://www.nextflow.io/docs/latest/getstarted.html</p>
+<p>To install Nextflow, a tool for orchestrating scientific workflows, follow these steps:</p>
+<p>Nextflow requires Java to be installed on your system. Make sure you have Java Development Kit (JDK) version 8 or later installed. You can check if Java is installed by running <code>java -version</code> in your terminal or command prompt.</p>
+<p>Then enter this command in your terminal:</p>
+<pre><code>curl -s https://get.nextflow.io | bash</code></pre>
+<p>It creates a file nextflow in the current dir. Visit the <a href="https://www.nextflow.io/">nextflow website for more details</a>.</p>
 </section>
 <section id="install-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="install-pipeline">Install assembly pipeline</h2>
 <p>To install the assembly pipeline, you can clone the repository from the following link:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clone the assembly pipeline</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://gitlab.com/cgps/ghru/pipelines/assembly.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clone the assembly pipeline</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://gitlab.com/cgps/ghru/pipelines/assembly.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will also need docker installed.</p>
 <p><strong><em>The materials provided in this repository are FREE to use.</em></strong> <strong><em>This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.</em></strong></p>
+</section>
+<section id="full-list-of-software-used" class="level2">
+<h2 class="anchored" data-anchor-id="full-list-of-software-used">Full list of software used</h2>
+<p>Software used within the workflow:</p>
+<ul>
+<li>FastQC A quality control tool for high throughput sequence data.</li>
+<li>Trimmomatic A flexible read trimming tool for Illumina NGS data.</li>
+<li>Cutadapt Finds and removes adapter sequences, primers, poly-A tails and other types of unwanted sequence from high-throughput sequencing reads</li>
+<li>mash Fast genome and metagenome distance estimation using MinHash.</li>
+<li>lighter Fast and memory-efficient sequencing error corrector.</li>
+<li>seqtk A fast and lightweight tool for processing sequences in the FASTA or FASTQ format.</li>
+<li>FLASH (Fast Length Adjustment of SHort reads) A very fast and accurate software tool to merge paired-end reads from next-generation sequencing experiments.</li>
+<li>SPAdes A genome assembly algorithm designed for single cell and multi-cells bacterial data sets.</li>
+<li>contig-tools A utility Python package to parse multi fasta files resulting from de novo assembly.</li>
+<li>Quast A tool to evaluate the aulaity of genome assemblies.</li>
+<li>ConFindr Software that can detect contamination in bacterial NGS data, both between and within species.</li>
+<li>QualiFyr Software to give an overall QC status for a sample based on multiple QC metric files</li>
+<li>MultiQC Aggregate results from bioinformatics analyses across many samples into a single report</li>
+<li>KAT The K-mer Analysis Toolkit (KAT) contains a number of tools that analyse and compare K-mer spectra</li>
+<li>BactInspector Software using an updated refseq mash database to predict species*</li>
+</ul>
 
 
 </section>

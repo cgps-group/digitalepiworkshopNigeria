@@ -105,11 +105,74 @@
     "text": "Module Leads: Julio Diaz Caballero, Natacha Couto, Georgina Lewis-Woodhouse, Emmanuelle Kumaran, Nabil Fareed-Alikhan, Sophia David, Monica Abrudan\n\nbased on the exercise developed by Silvia Argimon\n\n\n\nTable of contents\n\nIntroduction\nObjectives\nGenome analysis with Pathogenwatch\n\n\n\nIntroduction\nPathogenwatch provides a platform for comparing pathogen genome assemblies from around the world, integrating diverse data sets with rich representations. It provides species and taxonomy prediction for over 60,000 variants of bacteria, viruses, and fungi.\n\n\nObjectives\nAt the end of this session the participants will be able to:\n\nUpload assemblies and metadata file to PW\nLook at QC metrics provided by PW\nCreate a collection with the upload assemblies\nCreate a collection with the uploaded assemblies plus contextual genomes (Kp ST258 from Jan 2020 until now)\nExplore the genomes in PW\nDownload the cgSNP trees\nDownload the MLST results\nDownload the AMR/virulence results\n\n\n\nGenome analysis with Pathogenwatch\nhttps://pathogen.watch\nAfter obtaining the high quality assemblies, the user will use https://pathogen.watch to determine the sequence type (ST) of these genomes, build a tree and identify AMR/virulence determinants.\nClick on the upload link at the top right\n\nClick on Single Genome FASTAs\n\nDrag and Drop provided fasta files (file1 and file2) into the browser and wait for analysis to finish\n\nClick on VIEW GENOMESll\n\nSelect the two analysed genomes\n\nClick on Selected Genomes\n\nClick on Download data\n\nClick on MLST (Pasteur). This will download a csv file with the results.\n\nYou should now be able to find the following files on your Downloads folder: mlst-Pasteur.csv tree.nwk\nThe materials provided in this repository are FREE to use. This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement."
   },
   {
-    "objectID": "module3/module3.html",
-    "href": "module3/module3.html",
+    "objectID": "module3/module3.html#hardware",
+    "href": "module3/module3.html#hardware",
     "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
-    "section": "",
-    "text": "Module Leads: Julio Diaz Caballero, Natacha Couto, Georgina Lewis-Woodhouse, Emmanuelle Kumaran, Nabil Fareed-Alikhan, Sophia David, Monica Abrudan\n\nbased on the exercise developed by Silvia Argimon\n\n\n\nTable of contents\n\nIntroduction\nObjectives\nTrim, assemble and QC with GHRU Nextflow pipeline\n\n\n\nIntroduction\nNote: This exercise is a work of fiction. Any resemblance to a real life situation is purely coincidental.\nIn December 2020, three cases of primary bloodstream infections sustained by ertapenem-resistant Klebsiella pneumoniae were observed over a two-month period in the neonatal intensive care unit (NICU) at the University College Hospital in Ibadan, Oyo State. The NICU consists of a 15-bed tertiary level ward. Faecal screening of all admitted neonates was performed. Ten additional samples from the environment were collected. A plan of the NICU and sample collection can be seen below.\n\nThe reference lab has sent you the culture results in an Excel file called (lab_results.xlsx). Faecal screening of all admitted neonates, revealed that five other neonates were carriers of K. pneumoniae. The lab reported that 2 out of 10 environmental samples were positive for K. pneumoniae. This immediately prompted the closure of 1 room.\nOne colony from each confirmed case and two from the environment were sent to the GHRU-Ibadan unit for sequencing. The epidemiological and demographic data is summarised in the file epi_data.csv.\nIt is up to the user to now investigate the possibility of an outbreak of K. pneumoniae in the neonatal unit using the GHRU assembly pipeline, Pathogenwatch, data-flo and Microreact, free web applications developed by the Centre for Genomic Pathogen Surveillance for data analyses, integration and visualisation.\n\n\nObjectives\nAt the end of this session the participants will be able to:\n\nTrim, assemble and QC with GHRU Nextflow pipeline\nObtain high quality assemblies for downstream analysis\nIdentify and discard low quality genomes\nDetermine the probable cause of issues during sequencing and assembly\n\n\n\nTrim, assemble and QC with GHRU Nextflow pipeline\nhttps://gitlab.com/cgps/ghru/pipelines/assembly\nAt this point, the user is given 22 fastq files. The GHRU assembly pipeline uses a workflow implemented in Nextflow to process Illumina short-read fastq files and convert them to assemblies using the SPAdes assembler. Additionally, the workflow includes a quality control before and after trimming with Trimmomatic. The final assemblies are also quality controled using QUAST.\nFirst download Nextflow: curl -s https://get.nextflow.io | bash\nTo download the GHRU Assembly pipeline download the code: curl https://gitlab.com/cgps/ghru/pipelines/assembly.git\nTo run the pipeline: ./nextflow run assembly.nf \\ --adapter_file adapters.fas \\ --qc_conditions qc_conditions_nextera_relaxed_dev.yml \\ --input_dir input_data \\ --fastq_pattern '*{R,_}{1,2}.f*q.gz' \\ --output_dir assemblies \\ --depth_cutoff 100 \\ --prescreen_file_size_check 12 \\ --confindr_db_path /path_to/confindr_database \\ --careful \\ --kmer_min_copy 3 \\ --skip_quast_summary \\ --skip_quast_multiqc \\ --skip_fastqc_multiqc \\ -w work \\ -qs 1000 -resume\nThe materials provided in this repository are FREE to use. This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement."
+    "section": "Hardware",
+    "text": "Hardware\nFor this exercise you will use our pre configured bioinformatics servers. Connecting to our bioinformatics servers ensure the computational resources required for the assembly process are available. If you wish to run through this module on another platform, you will need to install the required software and download the sample data yourself. The pipeline we will be using is available here https://gitlab.com/cgps/ghru/pipelines/dsl2/pipelines/assembly.\nTo connect to our bioinformatics servers, follow the instructions below. Replace user with your username with the name of the server you want to connect to. You will need to enter your password when prompted. Your password will be provided to you by one of the instructors:\n# Connect to the server\nssh user@159.65.95.44"
+  },
+  {
+    "objectID": "module3/module3.html#data",
+    "href": "module3/module3.html#data",
+    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
+    "section": "Data",
+    "text": "Data\nYou will find 11 sets of paired-end Illumina reads in the /data/. Thus, this directory will contain 22 fastq files (two per genome). You can check the data is actually there:\n# Check the contents of the /data/ directory\nls /data/\nThe /datadirectory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA following the instructions in the fetching data bonus section."
+  },
+  {
+    "objectID": "module3/module3.html#software",
+    "href": "module3/module3.html#software",
+    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
+    "section": "Software",
+    "text": "Software\nThe assembly process pipeline will process each pair of Illumina short-read fastq files and assemble them using the SPAdes assembler. Along the assembly process, the workflow will perform quality control checks and filters. The workflow consists of the following steps:\n\nQC reads using FastQC before trimming\nTrim reads using Trimmomatic and Cutadapt (if --cutadapt specified)\nQC reads using FastQC after trimming\nCorrect reads using lighter\nCheck for contamination using confindr\nCount number of reads and estimate genome size using Mash\nDownsample reads if the --depth_cutoff argument was specified\nMerge reads using Flash where the insert size is small\nAssemble reads using SPAdes (by default the --careful option is turned off)\nAssess species identification using bactinspector\nAssess assembly quality using QUAST\nSummarise all assembly QCs using QUAST\n(Optional if QuailFyr qc conditions YAML file is supplied). Filter assemblies into three directories: pass, warning and failure based on QC metrics\n\n A sumamry of this process is shown above \nNextflow is already installed in our bioinformatics servers, and the assembly pipeline can be found in /opt/ghru-assembly. Let’s check that nextflow is installed and that we can find the assembly pipeline:\n# Check that nextflow is installed\nnextflow -v\n# Check the assembly pipeline can be found at /path/to/pipeline directory &lt;@Nabil please change this as well&gt;\nls /opt/ghru-assembly\nNextflow should be preconfigured for you, but if you want to try this on another platform you will need too install nextflow and assembly pipeline. You can install them by following the instructions in the install nextflow or install pipeline bonus sections."
+  },
+  {
+    "objectID": "module3/module3.html#implementation",
+    "href": "module3/module3.html#implementation",
+    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
+    "section": "Implementation",
+    "text": "Implementation\nFirst we need to create a directory to store the assemblies. We will call this directory results. You can create this directory with the following command, replace user with your username:\n# Create the results directory\nmkdir /workshop/user/results\nNext, let’s create a directory to store the implementation scripts and the working directory. We will call this directory scripts. You can create this directory with the following command, replace user with your username:\n# Create the scripts directory\nmkdir /workshop/user/scripts\nNow we create a script to run the assembly pipeline. You can create a file called assembly.sh in the scripts directory using a text editor such as nano or vim. You can copy and paste the following code into the file and save it:\nPlease change the output directory in line with your username.\n#!/bin/bash\nNEXTFLOW_WORKFLOWS_DIR='/opt/ghru-assembly'\nINPUT_DIR='/data'\nOUTPUT_DIR='/workshop/user/results'\n\nnextflow run ${NEXTFLOW_WORKFLOWS_DIR}/main.nf \n    --adapter_file adapters.fas \\\n    --qc_conditions qc_conditions_nextera_relaxed_dev.yml \\\n    --input_dir ${INPUT_DIR} \\\n    --fastq_pattern '*{R,_}{1,2}.f*q.gz' \\\n    --output_dir ${OUTPUT_DIR} \\\n    --depth_cutoff 100 \\\n    --prescreen_file_size_check 12 \\\n    --confindr_db_path /opt/confindr_db_2019_11_16 \\\n    --careful \\\n    --kmer_min_copy 3 \\\n    -w ${OUTPUT_DIR}/work \\\n    -resume\nFinally, you can run the assembly pipeline by executing the script, replace user with your username:\n# Run the assembly pipeline\nbash /workshop/user/scripts/assembly.sh"
+  },
+  {
+    "objectID": "module3/module3.html#results",
+    "href": "module3/module3.html#results",
+    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
+    "section": "Results",
+    "text": "Results\nThe assembly pipeline will create six directories in the assemblies directory, replace user with your username.\n# Check the contents of the /results directory\nls /workshop/user/results\nYou will find the fasta-formatted assemblies in the assemblies directory. There, you will find pass, warning, and failure directories containing the assemblies according to their quality. You can check the contents of the assemblies directory, replace user with your username:\n# Check the contents of the /results/assemblies directory \nls /workshop/user/results\nAdditonally you will find the quality_reports directory containing the quality control reports for the assemblies. You can check the contents of the quality_reports directory, replace user with your username:\n# Check the contents of the /results/quality_reports directory\nls /workshop/user/results/quality_reports\nYou may want to import the quality report (results/quality_reports/qualifyr_report.tsv) to your local machine so as to explore whether the assemblies are of high quality or not. You can use the scp command to do this, replace user with your username:\n# Copy the quality report to your local machine\nscp user@159.65.95.44:/workshop/user/results/quality_reports/qualifyr_report.tsv /path/to/local/machine\nYou will be prompted for your password. You can use the same command to copy the assemblies to your local machine (hint: scp -r helps you move an entire directory)."
+  },
+  {
+    "objectID": "module3/module3.html#other-workflow-outputs",
+    "href": "module3/module3.html#other-workflow-outputs",
+    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
+    "section": "Other workflow outputs",
+    "text": "Other workflow outputs\nThere is a great deal of other outputs produced by the pipeline. These will be found in the directory specified by the --output_dir argument. In this case, /workshop/user/results/\n\nA directory called fastqc/post_trimming that contans the Fastqc reports for each fastq in html format after trimming\nA directory called assemblies containing the final assembled scaffold files named as _scaffolds.fasta. If the qc_conditions argument was given there will be subdirectories named pass, warning and failure where the appropiately QCed scaffolds and failure reasons will be stored.\nA directory called quast containing:\n\nA summary quast report named combined_quast_report.tsv\nA transposed summary quast report with the samples as rows so that they can be sorted based on the quast metric in columns named combined_quast_report.tsv\n\nA directory called quality_reports containing html reports\n\nMultiQC summary reports combining QC results for all samples from\n\nFastQC: fastqc_multiqc_report.html\nQuast: quast_multiqc_report.html\n\nQualiFyr reports. If a qc_conditions.yml file was supplied reports will be generated that contain a summary of the overall pass/fail status of each sample.\n\nqualifyr_report.html : e.g QualiFyr Report\nqualifyr_report.tsv\n\n\nif the –full_output parameter is given then the following will also be available in the output directory\n\nA directory called fastqc/pre_trimming that contans the Fastqc reports for each fastq in html format prior to trimming\nA directory called corrected_fastqs that contains the fastq files that have been trimmed with Trimmomatic and corrected using Lighter\nIf using paired end reads, a directory called merged_fastqs that contains the fastq files that have been merged using Flash. There will be a files called\n\n.extendedFrags.fastq.gz merged reads\n.notCombined_1.fastq.gz unmerged read 1 reads\n.notCombined_2.fastq.gz unmerged read 2 reads"
+  },
+  {
+    "objectID": "module3/module3.html#fetching-data",
+    "href": "module3/module3.html#fetching-data",
+    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
+    "section": "Fetching data",
+    "text": "Fetching data\nYou can use tools such as wget or curl to fetch data from a remote location such as Figshare, ENA or SRA. For example, you can fetch the data from the following Figshare link:\n# Fetch the data from Figshare\nwget https://figshare.com/ndownloader/articles/25266367/versions/1 -O /data/fastqs.zip\n# Unzip the data\nunzip /data/fastqs.zip -d /data"
+  },
+  {
+    "objectID": "module3/module3.html#install-nextflow",
+    "href": "module3/module3.html#install-nextflow",
+    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
+    "section": "Install nextflow",
+    "text": "Install nextflow\nTo install Nextflow, a tool for orchestrating scientific workflows, follow these steps:\nNextflow requires Java to be installed on your system. Make sure you have Java Development Kit (JDK) version 8 or later installed. You can check if Java is installed by running java -version in your terminal or command prompt.\nThen enter this command in your terminal:\ncurl -s https://get.nextflow.io | bash\nIt creates a file nextflow in the current dir. Visit the nextflow website for more details."
+  },
+  {
+    "objectID": "module3/module3.html#install-pipeline",
+    "href": "module3/module3.html#install-pipeline",
+    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
+    "section": "Install assembly pipeline",
+    "text": "Install assembly pipeline\nTo install the assembly pipeline, you can clone the repository from the following link:\n# Clone the assembly pipeline\ngit clone https://gitlab.com/cgps/ghru/pipelines/assembly.git\nYou will also need docker installed.\nThe materials provided in this repository are FREE to use. This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement."
+  },
+  {
+    "objectID": "module3/module3.html#full-list-of-software-used",
+    "href": "module3/module3.html#full-list-of-software-used",
+    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
+    "section": "Full list of software used",
+    "text": "Full list of software used\nSoftware used within the workflow:\n\nFastQC A quality control tool for high throughput sequence data.\nTrimmomatic A flexible read trimming tool for Illumina NGS data.\nCutadapt Finds and removes adapter sequences, primers, poly-A tails and other types of unwanted sequence from high-throughput sequencing reads\nmash Fast genome and metagenome distance estimation using MinHash.\nlighter Fast and memory-efficient sequencing error corrector.\nseqtk A fast and lightweight tool for processing sequences in the FASTA or FASTQ format.\nFLASH (Fast Length Adjustment of SHort reads) A very fast and accurate software tool to merge paired-end reads from next-generation sequencing experiments.\nSPAdes A genome assembly algorithm designed for single cell and multi-cells bacterial data sets.\ncontig-tools A utility Python package to parse multi fasta files resulting from de novo assembly.\nQuast A tool to evaluate the aulaity of genome assemblies.\nConFindr Software that can detect contamination in bacterial NGS data, both between and within species.\nQualiFyr Software to give an overall QC status for a sample based on multiple QC metric files\nMultiQC Aggregate results from bioinformatics analyses across many samples into a single report\nKAT The K-mer Analysis Toolkit (KAT) contains a number of tools that analyse and compare K-mer spectra\nBactInspector Software using an updated refseq mash database to predict species*"
   },
   {
     "objectID": "module2/module2.html",
@@ -159,61 +222,5 @@
     "title": "Resources",
     "section": "",
     "text": "Here you can find other Resources that are useful:\nhttps://mmbdtp.github.io/modules/sequencing/file-formats/\nhttps://training.nextflow.io/basic_training/\nhttps://www.protocols.io/view/ghru-genomic-surveillance-of-antimicrobial-resista-bp2l6b11kgqe/v4\nhttps://gitlab.com/cgps/ghru/pipelines/assembly"
-  },
-  {
-    "objectID": "module3/module3.html#hardware",
-    "href": "module3/module3.html#hardware",
-    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
-    "section": "Hardware",
-    "text": "Hardware\nFor this exercise you will use our bioinformatics servers. Connecting to our bioinformatics servers ensure the computational resources required for the assembly process are available.\nTo connect to our bioinformatics servers, follow the instructions below. Replace user with your username and ghru-assembly with the name of the server you want to connect to. You will need to enter your password when prompted.:\nbash &lt;@Nabil modofy accordingly&gt; # Connect to the server ssh  user@ghru-assembly"
-  },
-  {
-    "objectID": "module3/module3.html#data",
-    "href": "module3/module3.html#data",
-    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
-    "section": "Data",
-    "text": "Data\nYou will find 11 sets of paired-end Illumina reads in the /data/&lt;@Nabil please check the raw data is here&gt; directory. Thus, this directory will contain 22 fastq files (two per genome). You can check the data is actually there:\n# Check the contents of the /data/ directory\nls /data/\nThe /data directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA following the instructions in the fetching data bonus section."
-  },
-  {
-    "objectID": "module3/module3.html#software",
-    "href": "module3/module3.html#software",
-    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
-    "section": "Software",
-    "text": "Software\nThe assembly process pipeline will process each pair of Illumina short-read fastq files and assemble them using the SPAdes assembler. Along the assembly process, the workflow will perform quality control checks and filters. Some of the most important steps are:\n\nTrimming of Illumina adapters and low quality bases using Trimmomatic\nQuality control of the reads using FastQC\nAssembly of the reads using SPAdes\nQuality control of the assemblies using QUAST\n\nNextflow is already installed in our bioinformatics servers, and the assembly pipeline can be found in /path/to/pipeline &lt;@Nabil please change this to fit the image structure&gt;. Let’s check that nextflow is installed and that we can find the assembly pipeline:\n# Check that nextflow is installed\nnextflow -v\n# Check the assembly pipeline can be found at /path/to/pipeline directory &lt;@Nabil please change this as well&gt;\nls /path/to/pipeline\nIf nextflow or the assembly pipeline are not installed, you can install them by following the instructions in the install nextflow or install pipeline bonus sections."
-  },
-  {
-    "objectID": "module3/module3.html#implementation",
-    "href": "module3/module3.html#implementation",
-    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
-    "section": "Implementation",
-    "text": "Implementation\nFirst we need to create a directory to store the assemblies. We will call this directory results. You can create this directory with the following command:\n# Create the results directory\nmkdir /results\nNext, let’s create a directory to store the implementation scripts and the working directory. We will call this directory scripts. You can create this directory with the following command:\n# Create the scripts directory\nmkdir /scripts\nNow we create a script to run the assembly pipeline. You can create a file called assembly.sh in the scripts directory using a text editor such as nano or vim. You can copy and paste the following code into the file and save it:\n```bash &lt;@Nabil we need to modify this to specificy adapter_file, confindr database, and qc conditions yaml file&gt; #!/bin/bash NEXTFLOW_WORKFLOWS_DIR=‘/path/tp/pipeline’ INPUT_DIR=‘/data’ OUTPUT_DIR=‘/results’\nnextflow run ${NEXTFLOW_WORKFLOWS_DIR}/assembly.nf –adapter_file adapters.fas –qc_conditions qc_conditions_nextera_relaxed_dev.yml –input_dir ${INPUT_DIR} –fastq_pattern ’*{R,_}{1,2}.f*q.gz’ –output_dir ${OUTPUT_DIR} –depth_cutoff 100 –prescreen_file_size_check 12 –confindr_db_path /path/to/confindr_database –careful –kmer_min_copy 3 -w ${OUTPUT_DIR}/work -resume\n\nFinally, you can run the assembly pipeline by executing the script:\n\n```bash\n# Run the assembly pipeline\nbash /scripts/assembly.sh"
-  },
-  {
-    "objectID": "module3/module3.html#results",
-    "href": "module3/module3.html#results",
-    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
-    "section": "Results",
-    "text": "Results\nThe assembly pipeline will create six directories in the assemblies directory.\n# Check the contents of the /results directory\nls /results\nYou will find the fasta-formatted assemblies in the assemblies directory. There, you will find pass, warning, and failure directories containing the assemblies according to their quality. You can check the contents of the assemblies directory:\n# Check the contents of the /results/assemblies directory \nls /results/assemblies\nAdditonally you will find the quality_reports directory containing the quality control reports for the assemblies. You can check the contents of the quality_reports directory:\n# Check the contents of the /results/quality_reports directory\nls /results/quality_reports\nYou may want to import the quality report (results/quality_reports/qualifyr_report.tsv) to your local machine so as to explore whether the assemblies are of high quality or not. You can use the scp command to do this:\nbash &lt;@Nabil please provide a proper username:address combination&gt; # Copy the quality report to your local machine scp user@ghru-assembly:/results/quality_reports/qualifyr_report.tsv /path/to/local/machine\nYou can use the same command to copy the assemblies to your local machine (hint: scp -r helps you move an entire directory)."
-  },
-  {
-    "objectID": "module3/module3.html#fetching-data",
-    "href": "module3/module3.html#fetching-data",
-    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
-    "section": "Fetching data",
-    "text": "Fetching data\nYou can use tools such as wget or curl to fetch data from a remote location such as Figshare, ENA or SRA. For example, you can fetch the data from the following Figshare link:\nbash &lt;@Nabil please check this link&gt; # Fetch the data from Figshare wget https://figshare.com/ndownloader/articles/25266367/versions/1 -O /data/fastqs.zip # Unzip the data unzip /data/fastqs.zip -d /data"
-  },
-  {
-    "objectID": "module3/module3.html#install-nextflow",
-    "href": "module3/module3.html#install-nextflow",
-    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
-    "section": "Install nextflow",
-    "text": "Install nextflow\nThis may be a bit of work, but you can install nextflow by following the instructions in the following link: https://www.nextflow.io/docs/latest/getstarted.html"
-  },
-  {
-    "objectID": "module3/module3.html#install-pipeline",
-    "href": "module3/module3.html#install-pipeline",
-    "title": "SESSION 3 - Introduction to Trimming, Assembly and QC",
-    "section": "Install assembly pipeline",
-    "text": "Install assembly pipeline\nTo install the assembly pipeline, you can clone the repository from the following link:\n# Clone the assembly pipeline\ngit clone https://gitlab.com/cgps/ghru/pipelines/assembly.git\nThe materials provided in this repository are FREE to use. This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement."
   }
 ]

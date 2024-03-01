@@ -34,11 +34,19 @@ At the end of this session the participants will be able to:
 
 Open the Microreact link in the output from data-flo. It should look something like this:
 
-<img src="img/microreact_link.png" width="50%" height="50%"/>
+![](img/New/Microreact_project.jpeg){fig-align="center"}
 
-Now change the colour column to "Source". Click on the eye icon at the top right of the page. Select "Source" from the `Colour Column` dropdown list.
+Now change the colour column to "Country". Click on the eye icon at the top right of the page. Select "Country" from the `Colour Column` dropdown list.
 
-<img src="img/microreact_colour.png" width="50%" height="50%"/>
+![](img/New/microreact_colour.jpeg)
+
+Add a timeline by clicking on the pencil and select "Create New Timeline". Select the placement for the timeline on your dashboard. Select "One column: Formatted Values" from the Temporal Data Type drop-down list. Finally select "collection_date in the temporal data column drop-down list.
+
+![](img/New/Microreact_add_timeline.jpeg){fig-align="center"}
+
+Add Metadata blocks to your tree. Select the sliders icon, then the Metadata blocks and choose the variables you would like to explore.
+
+![](img/New/Microreact_metadata_blocks.jpeg){fig-align="center"}
 
 Scale the markers on the map by clicking on the sliders icon, then in the opening options click on `Markers`. Finally, toggle the `Scale markers` option on.
 
