@@ -72,7 +72,9 @@ Add a new chart.
 
 ![](img/New/Microreact_add_chart.jpeg){fig-align="center"}
 
-Now that you are only looking at data from Nigeria, the colour
+After narrowing down to data from Nigeria, the colour column no longer provides useful information. Try changing it to a more informative column and experimenting with different colour palettes.
+
+![](img/New/microreact_colour_palette.png){fig-align="center" width="413"}
 
 # Web colours {#web-colours}
 
