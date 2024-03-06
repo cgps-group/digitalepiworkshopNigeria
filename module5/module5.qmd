@@ -108,11 +108,11 @@ A drop down menu will appear, select “create new input” 
 
 Renaming the Metadata datatable: under the column names input, rename all the columns according to the table below. 
 
-![](img/New/metadata_rename.png){fig-align="center"}
+![](img/New/metadata_rename.png){fig-align="center" width="410"}
 
 Renaming the joined lab/epi datatable: rename the columns according to the table below. In addition, under the discard unmapped, click the define value and select TRUE, this will discard any columns that were not renamed. 
 
-![](img/New/lab_epi_rename.png){fig-align="center"}
+![](img/New/lab_epi_rename.png){fig-align="center" width="410"}
 
 13\) Back to the PW metadata, you may have observed that the rows associated with the samples from University College Hospital are empty. These rows can be removed as the information for them is present in the joined lab/epi datatable. To do this, you can use the `filter rows` adaptor. Select the "collection_date" under the column name input and click on "define" under the filter type input. Then choose the "is-blank" option. Note: the data you want will be in the complementary output and not the data output
 
