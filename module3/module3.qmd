@@ -11,6 +11,7 @@ title: "SESSION 3 - Introduction to Trimming, Assembly and QC"
 -   [Introduction](#introduction)
 -   [Objectives](#learning-outcomes)
 -   [Trim, assemble and QC with GHRU Nextflow pipeline](#obtain-high-quality-assemblies)
+-   [Bonus material](#bonus-materials)
 
 # Introduction {#introduction}
 
@@ -64,7 +65,7 @@ You will find 11 sets of paired-end Illumina reads in the `/data/`. Thus, this d
 ls /data/
 ```
 
-The `/data `directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA following the instructions in the [fetching data](#fetching-data)  bonus section.
+The `/data` directory will serve as the input directory for the GHRU assembly pipeline. You can practice fetching the data from a remote location such as Figshare, ENA or SRA following the instructions in the [fetching data](#fetching-data)  bonus section.
 
 ## Software
 
@@ -94,7 +95,7 @@ Nextflow is already installed in our bioinformatics servers, and the assembly pi
 ```bash
 # Check that nextflow is installed
 nextflow -v
-# Check the assembly pipeline can be found at /path/to/pipeline directory <@Nabil please change this as well>
+# Check the assembly pipeline can be found at /opt/ghru-assembly directory
 ls /opt/ghru-assembly
 ```
 
@@ -126,15 +127,14 @@ NEXTFLOW_WORKFLOWS_DIR='/opt/ghru-assembly'
 INPUT_DIR='/data'
 OUTPUT_DIR='/workshop/user/results'
 
-nextflow run ${NEXTFLOW_WORKFLOWS_DIR}/main.nf 
+nextflow run ${NEXTFLOW_WORKFLOWS_DIR}/main.nf \
     --adapter_file adapters.fas \
-    --qc_conditions qc_conditions_nextera_relaxed_dev.yml \
+    --qc_conditions qc_conditions_nextera_relaxed.yml \
     --input_dir ${INPUT_DIR} \
     --fastq_pattern '*{R,_}{1,2}.f*q.gz' \
     --output_dir ${OUTPUT_DIR} \
     --depth_cutoff 100 \
     --prescreen_file_size_check 12 \
-    --confindr_db_path /opt/confindr_db_2019_11_16 \
     --careful \
     --kmer_min_copy 3 \
     -w ${OUTPUT_DIR}/work \
@@ -203,7 +203,7 @@ There is a great deal of other outputs produced by the pipeline. These will be f
         * <SAMPLE NAME>.notCombined_1.fastq.gz unmerged read 1 reads
         * <SAMPLE NAME>.notCombined_2.fastq.gz unmerged read 2 reads
 
-# Bonus Materials
+# Bonus Materials {#bonus-material}
 
 ## Fetching data {#fetching-data}
 
@@ -240,8 +240,6 @@ git clone https://gitlab.com/cgps/ghru/pipelines/assembly.git
 
 You will also need docker installed.
 
-***The materials provided in this repository are FREE to use.*** ***This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.***
-
 ## Full list of software used 
 
 Software used within the workflow:
@@ -260,4 +258,6 @@ Software used within the workflow:
 * QualiFyr Software to give an overall QC status for a sample based on multiple QC metric files
 * MultiQC Aggregate results from bioinformatics analyses across many samples into a single report
 * KAT The K-mer Analysis Toolkit (KAT) contains a number of tools that analyse and compare K-mer spectra
-* BactInspector Software using an updated refseq mash database to predict species*
+* BactInspector Software using an updated refseq mash database to predict species
+
+***The materials provided in this repository are FREE to use.*** ***This work is licensed under a Creative Commons Attribution 4.0 International License. Reuse is encouraged with acknowledgement.***

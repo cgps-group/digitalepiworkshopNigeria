@@ -14,26 +14,26 @@ title: "SESSION 4 - Genome Analysis with Pathogenwatch"
 
 # Introduction {#intro}
 
-Pathogenwatch provides a platform for comparing pathogen genome assemblies from around the world, integrating diverse data sets with rich representations. It provides species and taxonomy prediction for over 60,000 variants of bacteria, viruses, and fungi.
+Pathogenwatch provides a platform for analysing and comparing pathogen genome assemblies from around the world, integrating diverse data sets with rich representations. It provides species and taxonomy prediction for over 60,000 variants of bacteria, viruses, and fungi as well as analytical pipelines for a number of pathogens of interest.
 
 # Objectives {#learning-outcomes}
 
 At the end of this session the participants will be able to:
 
-1.  Upload assemblies and metadata file to PW
+1.  Upload assemblies to PW
 2.  Look at QC metrics provided by PW
-3.  Create a collection with the upload assemblies
+3.  Create a collection with the uploaded assemblies
 4.  Create a collection with the uploaded assemblies plus contextual genomes (Kp ST258 from Jan 2020 until now)
 5.  Explore the genomes in PW
-6.  Download the cgSNP trees
-7.  Download the MLST results
-8.  Download the AMR/virulence results
+6.  Download the cgSNP tree
+7.  Download the Kleborate results
+8.  Download the Metadata
 
 # Genome analysis with Pathogenwatch {#analyse-genomes}
 
 `https://pathogen.watch`
 
-After obtaining the high quality assemblies, the user will use [**https://pathogen.watch**](https://pathogen.watch) to determine the sequence type (ST) of these genomes, build a tree and identify AMR/virulence determinants.
+After obtaining the high quality assemblies, the user will use [**https://pathogen.watch**](https://pathogen.watch) to determine the species and sequence type (ST) of these genomes, understand the wider context and download the results of the analytical pipeline.
 
 Click on the upload link at the top right
 
